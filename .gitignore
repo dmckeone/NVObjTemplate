@@ -1,0 +1,36 @@
+# Build Directory
+Mac/build/*
+Windows/build/*
+Windows/build/debug/*
+
+*.pbxuser
+*.mode1v3
+*.user
+
+# Mac OS
+.DS_Store
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.exp
+*.lib
+*.obj
+*.res
+*.dep
+*.idb
+*.pdb
+*.manifest
+*.pdb
+*.res
+*.aps
+*.ncb
+
+# Compiled Dynamic libraries
+*.so
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
