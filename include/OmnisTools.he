@@ -1,0 +1,97 @@
+/* OMNIS TOOLS (HEADER)
+ * 
+ * This is a colleciton of tools for creating omnis components
+ *
+ * NOTE: All headers for external components must have the .he extension instead of the standard .h
+ *       To enable code-highliting in Visual Studio 2008 go to Tools->Options-Text Editor-File Extension 
+ *       and add "he" as a "Microsoft Visual C++" experience.
+ *
+ * October 4, 2010 David McKeone (Created)
+ */
+
+//Omnis includes
+#include <extcomp.he>
+#include <chrbasic.he>
+
+//Std Library includes
+#include <string>
+
+#ifndef OMNIS_TOOLS_HE_
+#define OMNIS_TOOLS_HE_
+
+namespace OmnisTools {
+	
+	// Thread data struct is an ease-of-use tool to keep track of the current context, 
+	// rather than just passing eci everywhere
+	struct tThreadData 
+	{
+		tThreadData( EXTCompInfo* pEci ) { mEci = pEci, mCurMethodName = ""; mExtraErrorText = ""; }
+		
+		EXTCompInfo* mEci;
+		std::string mCurMethodName;
+		std::string mExtraErrorText;
+	}; 
+	
+	// Parameter helpers
+	qbool getParamVar( tThreadData* pThreadData, qshort pParamNum, EXTfldval& pOutVar );
+	qbool getParamVar( EXTCompInfo* pEci, qshort pParamNum, EXTfldval& pOutVar );
+	
+	// qbool/bool helpers
+	qbool getQBoolFromBool(bool);
+	bool getBoolFromQBool(qbool);
+	
+	// std::string/EXTfldval helpers
+	std::string getStringFromEXTFldVal(EXTfldval&);
+	void getEXTFldValFromString(EXTfldval&, std::string);
+	
+	// std::string/qchar* helpers
+	qchar* getQCharFromString( std::string readString, qlong &retLength );
+	
+	// get ISO 8601 std::string from Date
+	std::string getISO8601DateStringFromEXTFldVal(EXTfldval&);
+	
+	// ************ TEMPLATES ************ //
+	
+	// Generic method for retrieving an object by it's instance
+	template <class T>
+	T* getObjForInstance(tThreadData* pThreadData, qobjinst objinst) {
+		LPARAM objinstPtr = reinterpret_cast<LPARAM>(objinst);
+		void* omnisPtr = ECOfindNVObject(pThreadData->mEci->mOmnisInstance, objinstPtr);
+		T* retPtr = reinterpret_cast<T*>( omnisPtr );
+		return retPtr;
+	}
+	
+	// Generic method for retrieving an object from it's EXTfldval
+	template <class T>
+	T* getObjForEXTfldval(tThreadData* pThreadData, EXTfldval &fVal) {
+		qobjinst objinst = fVal.getObjInst(qfalse);
+		
+		return getObjForInstance<T>(pThreadData, objinst);
+	}
+	
+	// Generic method for creating a new object in the Omnis pool
+	template <class T>
+	T* createNVObj(qshort objectType, tThreadData* pThreadData) {
+		qlong saveCompId = pThreadData->mEci->mCompId;  // Save the current comp ID
+		
+		pThreadData->mEci->mCompId = objectType; // Set the comp ID for the NEW object
+		qobjinst newObjInst = EXTobjinst( pThreadData->mEci );  // Create the new object (this calls ECM_OBJCONSTRUCT)
+		
+		pThreadData->mEci->mCompId = saveCompId; // Restore the saved comp ID
+		
+		T* nvObj = getObjForInstance<T>(pThreadData, newObjInst); // Locate the newly created object pointer
+		
+		return nvObj;
+	}
+	
+	// Generic method creating a new object in the Omnis pool from just the object
+	// Requires that T has the static member objResourceId set. (See NVObjBase)
+	template <class T>
+	T* createNVObj(tThreadData* pThreadData) {
+		qshort objectType = T::objResourceId;
+		
+		return createNVObj<T>(objectType, pThreadData);
+	}
+}
+	
+#endif OMNIS_TOOLS_HE_

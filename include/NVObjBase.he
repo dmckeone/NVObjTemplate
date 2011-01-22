@@ -1,0 +1,44 @@
+/* NON-VISUAL OBJECT BASE (IMPLEMENTATION)
+ * 
+ * Base class for all Non-Visual objects based Omnis objects
+ *
+ * March 30, 2010 David McKeone (Created)
+ */
+
+#include <extcomp.he>
+#include "NVObjTemplate.he"
+#include "OmnisTools.he"
+
+#ifndef NV_OBJ_BASE_HE_
+#define NV_OBJ_BASE_HE_
+
+// Class definition for C++ version of your object
+class NVObjBase
+{
+private:
+protected:
+	qobjinst			mObjInst;
+public:
+	// Static tracking variable
+	static qshort objResourceId;  // This static variable needs to be in all inherited objects
+	
+	// Constructor / Destructor
+	NVObjBase( qobjinst objinst );
+	virtual ~NVObjBase();
+	
+	// Object Copying
+	NVObjBase* dup( qlong propID, qobjinst objinst, OmnisTools::tThreadData *pThreadData );
+	virtual void copy( NVObjBase* pObj );
+		
+	// Methods Available and Method Call Handling (These should be overriden by a sub-class)
+	virtual qlong returnMethods( OmnisTools::tThreadData* );
+	virtual qlong methodCall( OmnisTools::tThreadData* );
+
+	// Properties and Property Call Handling (These should be overriden by a sub-class)
+	virtual qlong returnProperties( OmnisTools::tThreadData* );
+	virtual qlong getProperty( OmnisTools::tThreadData* );
+	virtual qlong setProperty( OmnisTools::tThreadData* );
+	virtual qlong canAssignProperty( OmnisTools::tThreadData*, qlong propID );
+};
+
+#endif /* NV_OBJ_BASE_HE_ */

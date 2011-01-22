@@ -1,0 +1,4 @@
+LIBRARY         NVObjTemplate
+EXPORTS
+    NVObjWndProc  @1
+ 

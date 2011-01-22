@@ -1,0 +1,25 @@
+/* NON-VISUAL OBJECT TEMPLATE (HEADER)
+ * 
+ * This component is designed to show the basics that are required for creating a non-visual 
+ * external object.
+ *
+ * NOTE: All headers for external components must have the .he extension instead of the standard .h
+ *       To enable code-highliting in Visual Studio 2008 go to Tools->Options-Text Editor-File Extension 
+ *       and add "he" as a "Microsoft Visual C++" experience.
+ *
+ * March 30, 2010 David McKeone (Created)
+ * Adapted from the Generic template provided by TigerLogic and omnis.net 
+ */
+
+#include <extcomp.he>
+#include "OmnisTools.he"
+
+#ifndef NV_OBJ_TEMPLATE_HE
+#define NV_OBJ_TEMPLATE_HE
+
+class NVObjBase;  // To prevent circular include reference with NVObjBase.he declare this here.
+
+NVObjBase* createObject( qlong propID, qobjinst objinst, OmnisTools::tThreadData* );
+void removeObject( qlong propID, NVObjBase* nvObj );
+
+#endif /* NV_OBJ_TEMPLATE_HE */

@@ -1,0 +1,48 @@
+/* SIMPLE OBJECT (HEADER)
+ * 
+ * This object has some simple functionality to show how to do basic method calls and property setting
+ *
+ * NOTE: All headers for external components must have the .he extension instead of the standard .h
+ *       To enable code-highliting in Visual Studio 2008 go to Tools->Options-Text Editor-File Extension 
+ *       and add "he" as a "Microsoft Visual C++" experience.
+ *
+ * March 30, 2010 David McKeone (Created)
+ */
+
+#include <extcomp.he>
+#include "NVObjBase.he"
+#include "OmnisTools.he"
+
+#ifndef SIMPLE_HE_
+#define SIMPLE_HE_
+
+// Class definition for C++ version of your object
+class NVObjSimple : public NVObjBase
+{
+private:
+	qlong				myProperty; /* Value for $myproperty */
+protected:
+public:		
+	// Static tracking variable
+	static qshort objResourceId;  // This static variable needs to be in all inherited objects
+	
+	// Constructor / Destructor
+	NVObjSimple( qobjinst objinst, OmnisTools::tThreadData *pThreadData );
+	virtual ~NVObjSimple();
+
+	// Methods Available and Method Call Handling
+	virtual qlong returnMethods( OmnisTools::tThreadData* pThreadData );
+	virtual qlong methodCall( OmnisTools::tThreadData* pThreadData );
+
+	// Properties and Property Call Handling
+	virtual qlong returnProperties( OmnisTools::tThreadData* pThreadData );
+	virtual qlong getProperty( OmnisTools::tThreadData* pThreadData );
+	virtual qlong setProperty( OmnisTools::tThreadData* pThreadData );
+	virtual qlong canAssignProperty( OmnisTools::tThreadData* pThreadData, qlong propID );
+	
+	// Custom (Your) Methods
+	void methodSquare( OmnisTools::tThreadData* pThreadData, qshort pParamCount );
+	void methodEmpty( OmnisTools::tThreadData* pThreadData, qshort pParamCount );
+};
+
+#endif /* SIMPLE_HE_ */

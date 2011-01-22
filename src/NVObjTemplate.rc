@@ -1,0 +1,21 @@
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+		 1000									"NVObjExample"
+		 1001									"NVObjExample"
+		 1002									"Simple: Example for how to create a non-visual object in Omnis Studio"
+		 
+		 2100									"$squareNum:$squareNum(Number) returns the square of Number"
+		 2101									"$empty:$empty does nothing.  Helps determine object overhead."
+		 
+		 3100									"$myProperty:$myproperty returns a number"
+		 
+		 4000									"Number"
+		 
+		23000									"kNVObj"
+		23001									"Category~MyConstant:0:MyConstant:Description of my constant"
+		 
+		31000									"NVObjWndProc"
+END
+
+
