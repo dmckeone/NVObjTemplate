@@ -1,7 +1,8 @@
 # Build Directory
-Mac/build/*
-Windows/build/*
-Windows/build/debug/*
+proj/Mac/build/*
+proj/Windows/build/*
+proj/Windows/build/debug/*
+deploy/*
 
 *.pbxuser
 *.mode1v3
@@ -29,6 +30,9 @@ Windows/build/debug/*
 
 # Compiled Dynamic libraries
 *.so
+*.dll
+*.xcomp
+*.u_xcomp
 
 # Compiled Static libraries
 *.lai

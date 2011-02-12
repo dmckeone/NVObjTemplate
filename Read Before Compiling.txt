@@ -1,0 +1,174 @@
+NVObjTemplate
+Copyright (c) 2010 David McKeone
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+1. Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+2. Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the distribution.
+3. The name of the author may not be used to endorse or promote products
+   derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
+IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
+INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+---------------------------------------------------------------
+- STEPS REQUIRED BEFORE COMPILATION (SETUP OF OMNIS API)
+---------------------------------------------------------------
+
+1) Ensure that you have the appropriate development environment installed
+     Windows = Visual Studio 2008
+         Mac = XCode 3.2+
+
+2) Ensure that you are using Omnis Studio 5+ (This component is Unicode only)
+   a) (Mac Only) Ensure that the application path bundle name has no spaces.  e.g. /Applications/OmnisStudio5.app
+   b) (Windows Only) Ensure that the path to the omnis.exe does not have any spaces (So don't put in "Program Files").  e.g C:\TigerLogic\OS50\omnis.exe
+
+3) (Mac only) Ensure that omnisrc.app has been copied (or symbolically linked) into /Developer/Tools.
+
+4) Ensure that this directory is contained in folders with no spaces
+      e.g Windows = C:\Externals\MyProjects
+              Mac = /Externals/MyProjects
+
+5) Ensure that you set the Installation directory for the component and the path used for omnis libraries
+      Windows: a) Right-click on My Computer
+               b) Click 'Advanced' tab or 'Advanced System Settings'
+               c) Click 'Environment Variables'
+               d) Under 'System Variables' click 'New…"
+               e) Variable name = OMNIS_XCOMP_PATH
+               f) Variable value is the path to the xcomp directory in the Omnis directory
+                   NOTE:  There can be no spaces in the path (See Step 2)
+                    e.g C:\TigerLogic\OS501\xcomp
+	       g) Under 'System Variables' click 'New…"
+               h) Variable name = OMNIS_LIB_PATH
+               i) Variable value is the path to the Omnis library dependencies.  
+                  The folder specified should contain the COMPLIB, EXTLIB and ULIBS folders from the API.
+                   NOTE:  There can be no spaces in the path (See Step 2)
+                    e.g C:\Externals\OmnisDependencies\Windows
+               j) If Visual Studio is open, close and re-open it.
+
+
+         Mac:  a) Select 'Go' menu in Finder
+               b) Select 'Go to Folder'
+               c) Type ~/.MacOSX/
+                    NOTE: Create the .MacOSX folder if it doesn't exist
+               d) Open environment.plist 
+                    NOTE: If it doesn't exist then it can be created using the Property List Editor application in /Developer/Applications/Utilities
+               e) Click the 'Root' dictionary line
+               f) Click the 'Add Child' toolbar button
+               g) Key = OMNIS_XCOMP_PATH
+               h) Type = String
+               i) Value = Path to the xcomp directory in the Omnis application package
+                  NOTE: There can be no spaces in the path (See Step 2)
+                  e.g /Applications/OmnisStudio5.app/Contents/MacOS/xcomp
+               j) Click the 'Root' dictionary line
+               k) Click the 'Add Child' toolbar button
+               l) Key = OMNIS_LIB_PATH
+               m) Type = String
+               n) Value = Path to the Omnis library dependencies.  
+                  The folder specified should contain the compile and frameworks folders from the API.
+                  NOTE: There can be no spaces in the path (See Step 2)
+                  e.g \Externals\OmnisDependencies\Mac
+               o) Log off of OS X and log back in 
+
+---------------------------------------------------------------
+OPTIONAL -- BOOST LIBRARIES
+---------------------------------------------------------------
+5a) Some projects may also require the Boost libraries, this requires downloading Boost(http://www.boost.org) extracting it to a directory and setting up the $BOOST_ROOT environment variable.  (Boost Getting Started: http://www.boost.org/doc/libs/release/more/getting_started/index.html)
+      Windows: a) Right-click on My Computer
+               b) Click 'Advanced' tab or 'Advanced System Settings'
+               c) Click 'Environment Variables'
+               d) Under 'System Variables' click 'New…"
+               e) Variable name = BOOST_ROOT
+               f) Variable value is the path to the Boost directory
+                   NOTE:  There can be no spaces in the path (See Step 2)
+                    e.g C:\Boost\boost_1_44_0  (For Version 1.44, the current version at time of writing)
+               g) If Visual Studio is open, close and re-open it.
+
+
+         Mac:  a) Select 'Go' menu in Finder
+               b) Select 'Go to Folder'
+               c) Type ~/.MacOSX/
+                    NOTE: Create the .MacOSX folder if it doesn't exist
+               d) Open environment.plist 
+                    NOTE: If it doesn't exist then it can be created using the Property List Editor application in /Developer/Applications/Utilities
+               e) Click the 'Root' dictionary line
+               f) Click the 'Add Child' toolbar button
+               g) Key = BOOST_ROOT
+               h) Type = String
+               i) Value = Path to the Boost directory
+                  NOTE: There can be no spaces in the path (See Step 2)
+                  e.g /Boost/boost_1_44_0  (For Version 1.44, the current version at time of writing)
+               f) Log off of OS X and log back in 
+
+5b) Some projects may also require Boost libraries to be built.  To build boost libraries you must go to the boost directory and execute bjam commands or install the libraries from an installer.  The commands are to be executed from the same directory as $BOOST_ROOT from 5a.  NOTE: All projects assume this builds libraries into $BOOST_ROOT/stage/lib
+     Windows: Install libraries from installer (easiest)
+		
+              -or-
+
+               Complete:
+	       bjam -a --layout=versioned --build-type=complete
+
+	       Regular:
+	       bjam -a --layout=versioned
+
+	       Complete - Static:
+	       bjam -a --layout=versioned --build-type=complete link=static
+
+	       Regular - Static:
+	       bjam -a --layout=versioned link=static
+
+
+         Mac:  Complete:
+	       ./bjam -a --layout=versioned --build-type=complete toolset=darwin  architecture=combined address-model=32_64 macosx-version=10.5 macosx-version-min=10.4
+
+	       Regular:
+	       ./bjam -a --layout=versioned toolset=darwin architecture=combined address-model=32_64 macosx-version=10.5 macosx-version-min=10.4
+
+	       Complete - Static:
+	       ./bjam -a --layout=versioned --build-type=complete toolset=darwin  link=static architecture=combined address-model=32_64 macosx-version=10.5 macosx-version-min=10.4
+
+	       Regular - Static:
+	       ./bjam -a --layout=versioned toolset=darwin link=static architecture=combined address-model=32_64 macosx-version=10.5 macosx-version-min=10.4
+
+---------------------------------------------------------------
+---------------------------------------------------------------
+
+
+6) Ensure that the Omnis executable has been set so 'Build and Run' can be used
+     Windows: a) Open Visual Studio 2008 project NVObjTemplate.vcprog
+              b) Go to 'Debug' menu
+              c) Select 'Start Debugging'
+              d) A window will appear asking to find the executable
+              e) Enter the executable path
+              f) Click OK
+              g) A window may appear saying that the executable does not have debug information - that is ok, dismiss the message.
+
+         Mac: a) Open XCode project NVObjTemplate.xcodeproj
+              b) Locate "Omnis" under "Executables"
+              c) Right-Click on "Omnis" and select "Get Info"
+              d) Change "Path" to the path of the Omnis Studio application bundle
+                    e.g /Applications/OmnisStudio5.app
+
+7) Attempt to compile the project
+     Windows: NOTE -- If you did step 6 then the project has already been compiled and Omnis opened, but the steps are here for completeness.
+              a) Open Visual Studio 2008 project NVObjTemplate.vcprog
+              b) Go to 'Build' menu -or- Go to 'Debug' menu
+              c) Select 'Build Solution' -or- Select 'Start Debugging' to compile component and open Omnis
+
+         Mac: a) Open XCode project NVObjTemplate.xcodeproj
+              b) Go to 'Build' menu
+              c) Select 'Build Results' -or- 'Build and Debug' to compile component and open Omnis
+
