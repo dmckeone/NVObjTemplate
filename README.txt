@@ -25,19 +25,22 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ---------------------------------------------------------------
+
 - DESCRIPTION
+
 ---------------------------------------------------------------
+
 
 This project was started so that a build tree and example library could be created that showed how to setup cross-platform Omnis externals with support for a version control system (such as Subversion, Git or Mercurial) and an automated build system.
 
-If this example is used on a Mac, then a project can be simultaneously used by XCode and Visual Studio 2008 (in Parallels or VMWare) against the same set of source files (Important so development can occur in a single development environment, but builds can be made on all platforms).  Only additional source files need to be added to each project when changes occur.
+If this example is used on a Mac, then a project can be simultaneously used by XCode and Visual Studio 2008 (in Parallels or VMWare) against the same set of source files (Important so development can occur in a single development environment, but builds can be made on all platforms).  Only additional source files need to be added to each project when changes occur.  Linux support is not available at this time.
 
-Linux support is not available at this time.  (But I'm happy to add it if someone is able to adapt this system to Linux)
-
-It may be informative to download the External Component SDK from TigerLogic and read their documentation before setting up this project, but it should not be necessary as everything required is included in this package.
+It is required to download the SDK from TigerLogic in order to setup the build environment variables required for this project: http://www.tigerlogic.com/tigerlogic/omnis/products/components/buildyourown.jsp
 
 ---------------------------------------------------------------
+
 - DESCRIPTION OF FILES
+
 ---------------------------------------------------------------
 
 ../include/NVObjTemplate.he
@@ -56,11 +59,17 @@ It may be informative to download the External Component SDK from TigerLogic and
 
 ../src/NVObjTemplate.def : This file holds the entry point name for Windows components (Should match resource 32000 in NVObjTemplate.rc)
 
----------------------------------------------------------------
-- BUILD TREE
+
 ---------------------------------------------------------------
 
+- BUILD TREE
+
+---------------------------------------------------------------
+
+
+
 Windows and Mac projects are configured to look at directories within the "MyProjects" folder, so no additional work should be required for compiling.  It's better to avoid spaces in paths as the Omnis build system doesn't properly recognize them.
+
 
 Omnis External Dependencies:
 -----------------------------
@@ -74,36 +83,53 @@ include = Header fields for component NVObjTemplate
 src     = Source files for component NVObjTemplate 
 proj    = Platform dependant project files 
 
+
 Project Locations:
 -----------------------------
 proj    = Platform dependant project files 
 
----------------------------------------------------------------
-- BUILD OUTPUT
+
 ---------------------------------------------------------------
 
+- BUILD OUTPUT
+
+---------------------------------------------------------------
+
+
 Debug / Development output puts the component in the Omnis Studio xcomp folder (See OMNIS DIRECTORY).
+
 
 Release output puts the component in the deploy folder.
 deploy/Mac/     = Mac component
 deploy\Windows\ = Windows component 
 
----------------------------------------------------------------
-- OMNIS DIRECTORY
+
+
 ---------------------------------------------------------------
 
+- OMNIS DIRECTORY
+
+---------------------------------------------------------------
+
+
+
 The Omnis directory must be setup prior to compiling any debug versions of the external.  It is read from an Environment Variable, OMNIS_XCOMP_PATH.
+
+
 
 For windows this is like: C:\TigerLogic\OS50\xcomp
 - Set under System Properties (Access by Right-Clicking My Computer and then selecting Properties)
 - Requires close and re-open of Visual Studio
+
 
 For Mac this is like: HD:Applications:OmnisStudio:Contents:MacOS:xcomp
 - Set in the environment.plist file in the user home directory ~/.MacOSX/environment.plist 
 - Requires log off of OS X
 
 ---------------------------------------------------------------
+
 - CUSTOMIZATION (How to change name from NVObjTemplate)
+
 ---------------------------------------------------------------
 
 Obviously the purpose of any template is to get you started with creating your own components.  While renaming the classes can be a delicate process these are the things that I've found to be a good starting place.
@@ -127,3 +153,4 @@ Windows:
 - Perform a global find/replace for NV_OBJ_TEMPLATE_HE
 - Rename NVObjTemplate.rc 
 - Rename NVObjTemplate.def
+
