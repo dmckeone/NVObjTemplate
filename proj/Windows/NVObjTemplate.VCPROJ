@@ -50,7 +50,7 @@
 				Optimization="3"
 				InlineFunctionExpansion="1"
 				FavorSizeOrSpeed="1"
-				AdditionalIncludeDirectories="..\..\Windows\COMPLIB;..\include"
+				AdditionalIncludeDirectories="$(OMNIS_LIB_PATH)\COMPLIB"
 				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS;iswin32;isXCOMPLIB;NO_STRICT;isunicode;UNICODE;_CRT_SECURE_NO_DEPRECATE;_CRT_NON_CONFORMING_SWPRINTFS;_CRT_NONSTDC_NO_DEPRECATE;_UNICODE"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -82,9 +82,9 @@
 				OutputFile="$(outdir)\$(ProjectName).dll"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="..\..\Windows\ULIBS"
+				AdditionalLibraryDirectories="$(OMNIS_LIB_PATH)\ULIBS"
 				IgnoreDefaultLibraryNames="libc.lib"
-				ModuleDefinitionFile="..\src\$(ProjectName).def"
+				ModuleDefinitionFile="..\..\src\$(ProjectName).def"
 				ProgramDatabaseFile="$(IntDir)/$(ProjectName).pdb"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
@@ -149,7 +149,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../Windows/COMPLIB;,../include"
+				AdditionalIncludeDirectories="..\..\include;&quot;$(OMNIS_LIB_PATH)\COMPLIB&quot;"
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS;iswin32;isXCOMPLIB;NO_STRICT;isunicode;_UNICODE;UNICODE;_CRT_SECURE_NO_DEPRECATE;_CRT_NON_CONFORMING_SWPRINTFS;_CRT_NONSTDC_NO_DEPRECATE"
 				MinimalRebuild="true"
 				RuntimeLibrary="2"
@@ -181,9 +181,9 @@
 				OutputFile="$(outdir)/$(ProjectName).dll"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="..\..\Windows\ULIBS"
+				AdditionalLibraryDirectories="$(OMNIS_LIB_PATH)\ULIBS"
 				IgnoreDefaultLibraryNames="libc.lib"
-				ModuleDefinitionFile="..\src\$(ProjectName).def"
+				ModuleDefinitionFile="..\..\src\$(ProjectName).def"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(IntDir)/$(ProjectName).pdb"
 				SubSystem="2"
@@ -225,23 +225,19 @@
 			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat;for;f90"
 			>
 			<File
-				RelativePath="..\src\NVObjBase.cpp"
+				RelativePath="..\..\src\NVObjBase.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\src\NVObjTemplate.cpp"
+				RelativePath="..\..\src\NVObjTemplate.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\src\NVObjTemplate.def"
+				RelativePath="..\..\src\OmnisTools.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\src\OmnisTools.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\src\Simple.cpp"
+				RelativePath="..\..\src\Simple.cpp"
 				>
 			</File>
 		</Filter>
@@ -250,7 +246,7 @@
 			Filter="ico;cur;bmp;dlg;rc2;rct;bin;cnt;rtf;gif;jpg;jpeg;jpe"
 			>
 			<File
-				RelativePath="..\src\NVObjTemplate.rc"
+				RelativePath="..\..\src\NVObjTemplate.rc"
 				>
 			</File>
 		</Filter>
@@ -259,19 +255,19 @@
 			Filter="h;hpp;hxx;hm;inl;fi;fd"
 			>
 			<File
-				RelativePath="..\include\NVObjBase.he"
+				RelativePath="..\..\include\NVObjBase.he"
 				>
 			</File>
 			<File
-				RelativePath="..\include\NVObjTemplate.he"
+				RelativePath="..\..\include\NVObjTemplate.he"
 				>
 			</File>
 			<File
-				RelativePath="..\include\OmnisTools.he"
+				RelativePath="..\..\include\OmnisTools.he"
 				>
 			</File>
 			<File
-				RelativePath="..\include\Simple.he"
+				RelativePath="..\..\include\Simple.he"
 				>
 			</File>
 		</Filter>
