@@ -51,7 +51,7 @@ NVObjBase::~NVObjBase()
 // Duplicate an object into a new object
 NVObjBase* NVObjBase::dup( qlong propID, qobjinst objinst, tThreadData *pThreadData  )
 {
-	NVObjBase* copy = (NVObjBase*)createObject(propID, objinst, pThreadData);  // Defined in jsoncpp
+	NVObjBase* copy = (NVObjBase*)createObject(propID, objinst, pThreadData);
 	return copy;
 }
 

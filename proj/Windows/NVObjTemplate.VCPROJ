@@ -17,7 +17,7 @@
 	<Configurations>
 		<Configuration
 			Name="UNICODE Release|Win32"
-			OutputDirectory="../deploy/Windows"
+			OutputDirectory="../../deploy/Windows"
 			IntermediateDirectory=".\build\release"
 			ConfigurationType="2"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
@@ -50,7 +50,7 @@
 				Optimization="3"
 				InlineFunctionExpansion="1"
 				FavorSizeOrSpeed="1"
-				AdditionalIncludeDirectories="$(OMNIS_LIB_PATH)\COMPLIB"
+				AdditionalIncludeDirectories="..\..\include;&quot;$(OMNIS_LIB_PATH)\COMPLIB&quot;"
 				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS;iswin32;isXCOMPLIB;NO_STRICT;isunicode;UNICODE;_CRT_SECURE_NO_DEPRECATE;_CRT_NON_CONFORMING_SWPRINTFS;_CRT_NONSTDC_NO_DEPRECATE;_UNICODE"
 				StringPooling="true"
 				RuntimeLibrary="2"
