@@ -31,11 +31,19 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ---------------------------------------------------------------
 
 
-This project was started so that a build tree and example library could be created that showed how to setup cross-platform Omnis externals with support for a version control system (such as Subversion, Git or Mercurial) and an automated build system.
+This project was started so that a build tree and example library could be created that showed how 
+to setup cross-platform Omnis externals with support for a version control system (such as 
+Subversion, Git or Mercurial) and an automated build system.
 
-If this example is used on a Mac, then a project can be simultaneously used by XCode and Visual Studio 2008 (in Parallels or VMWare) against the same set of source files (Important so development can occur in a single development environment, but builds can be made on all platforms).  Only additional source files need to be added to each project when changes occur.  Linux support is not available at this time.
+If this example is used on a Mac, then a project can be simultaneously used by XCode and Visual 
+Studio 2008 (in Parallels or VMWare) against the same set of source files (Important so development 
+can occur in a single development environment, but builds can be made on all platforms).  Only 
+additional source files need to be added to each project when changes occur.  Linux support is not 
+available at this time.
 
-It is required to download the SDK from TigerLogic in order to setup the build environment variables required for this project: http://www.tigerlogic.com/tigerlogic/omnis/products/components/buildyourown.jsp
+It is required to download the SDK from TigerLogic in order to setup the build environment variables 
+required for this project: 
+http://www.tigerlogic.com/tigerlogic/omnis/products/components/buildyourown.jsp
 
 ---------------------------------------------------------------
 
@@ -68,7 +76,9 @@ It is required to download the SDK from TigerLogic in order to setup the build e
 
 
 
-Windows and Mac projects are configured to look at directories within the "MyProjects" folder, so no additional work should be required for compiling.  It's better to avoid spaces in paths as the Omnis build system doesn't properly recognize them.
+Windows and Mac projects are configured to look at directories within the "MyProjects" folder, so no
+additional work should be required for compiling.  It's better to avoid spaces in paths as the Omnis 
+build system doesn't properly recognize them.
 
 
 Omnis External Dependencies:
@@ -113,7 +123,8 @@ deploy\Windows\ = Windows component
 
 
 
-The Omnis directory must be setup prior to compiling any debug versions of the external.  It is read from an Environment Variable, OMNIS_XCOMP_PATH.
+The Omnis directory must be setup prior to compiling any debug versions of the external.  It is read 
+from an Environment Variable, OMNIS_XCOMP_PATH.
 
 
 
@@ -132,10 +143,12 @@ For Mac this is like: HD:Applications:OmnisStudio:Contents:MacOS:xcomp
 
 ---------------------------------------------------------------
 
-Obviously the purpose of any template is to get you started with creating your own components.  While renaming the classes can be a delicate process these are the things that I've found to be a good starting place.
+Obviously the purpose of any template is to get you started with creating your own components.  While 
+renaming the classes can be a delicate process these are the things that I've found to be a good starting place.
 
 All:
-- Since many files are being renamed they may need to be re-added to the project.  Especially if you rename on Mac and then open Windows project or vice-versa.
+- Since many files are being renamed they may need to be re-added to the project.  Especially if you 
+  rename on Mac and then open Windows project or vice-versa.
 
 Mac: 
 - Rename the NVObjTemplate.xcodeproj project file (while the project is closed)
