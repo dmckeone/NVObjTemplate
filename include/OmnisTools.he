@@ -100,6 +100,7 @@ namespace OmnisTools {
 	// Generic method for retrieving an object by it's instance
 	template <class T>
 	T* getObjForInstance(tThreadData* pThreadData, qobjinst objinst) {
+		objinst = reinterpret_cast<qobjinst>(ECOgetNVObject(objinst)); // Attempt to get super class for NV Objects that are inherited by Omnis objects
 		LPARAM objinstPtr = reinterpret_cast<LPARAM>(objinst);
 		void* omnisPtr = ECOfindNVObject(pThreadData->mEci->mOmnisInstance, objinstPtr);
 		T* retPtr = reinterpret_cast<T*>( omnisPtr );
