@@ -52,7 +52,7 @@ using OmnisTools::tThreadData;
 // Resources for constants
 const static qshort kConstResourcePrefix = 23000,
                     kConstResourceStart  = 23001,
-                    kConstResourceEnd    = 23001;
+                    kConstResourceEnd    = 23104;
 
 // Resource # for object group.
 const static qshort cNVObjGroup = 1001;
@@ -293,7 +293,7 @@ extern "C" qlong OMNISWNDPROC NVObjWndProc(HWND hwnd, LPARAM Msg, WPARAM wParam,
 			EXTfldval exfldval;
 			str80 conPrefix; 
 			
-		// Read string from resource, and assign it to return parameter
+			// Read string from resource, and assign it to return parameter
 			RESloadString(gInstLib,kConstResourcePrefix,conPrefix);
 			exfldval.setChar(conPrefix);
 			

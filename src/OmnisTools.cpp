@@ -79,6 +79,102 @@ bool OmnisTools::getBoolFromQBool(qbool qb) {
 	}
 }
 
+// Get a std::wstring from an EXTfldval object
+std::wstring OmnisTools::getWStringFromEXTFldVal(EXTfldval& fVal) {
+	std::wstring retString;
+	
+	// Get a qchar* string
+	qlong maxLength = fVal.getBinLen()+1; // Use binary length as approximation of maximum size
+	qlong length = 0, stringLength = 0;
+	qchar* omnisString = new qchar[maxLength];
+	fVal.getChar(maxLength, omnisString, length);
+	
+	wchar_t* cString;
+#if MARKUP_SIZEOFWCHAR == 2
+	// For 2-Byte UTF16 wchar_t* (Typically Windows)
+	// Convert from UTF8 to UTF16 and set new stringLength
+	
+	// Translate qchar* string into UTF8 binary
+	qbyte* utf8data = reinterpret_cast<qbyte*>(omnisString);
+	stringLength = CHRunicode::charToUtf8(omnisString, length, utf8data);
+	
+	// Translate UTF8 to UTF16
+	CHRconvToUtf16 utf16conv(utf8data, stringLength);
+	UChar* utf16data = utf16conv.dataPtr();
+	stringLength = utf16conv.len();
+	
+	// Translate UTF16 binary into char* string
+	cString = reinterpret_cast<wchar_t*>(utf16data);
+#else
+	// For 4-Byte UTF32 wchar_t* (Typically Mac and Linux)
+	// Convert from UTF8 to UTF32 and set new stringLength
+	stringLength = length;
+	CHRconvToUtf32FromChar utf32conv(omnisString, stringLength, qfalse);
+	U32Char* utf32data = utf32conv.dataPtr();
+	stringLength = utf32conv.len();
+	
+	// Translate UTF16 binary into char* string
+	cString = reinterpret_cast<wchar_t*>(utf32data);
+#endif
+	
+	// Create standard string
+	retString = std::wstring(cString,stringLength);
+	
+	// Clean-up
+	delete [] omnisString;
+	
+	return retString;
+}
+
+// Set an existing EXTfldval object from a std::wstring
+void OmnisTools::getEXTFldValFromWString(EXTfldval& fVal, const std::wstring readString) {
+	qlong length;
+	qchar* omnisString = getQCharFromWString(readString, length);
+	
+	fVal.setChar(omnisString, length); // Set value of character field, but exclude the last character since it will be the null terminator from the C String
+	
+	// Clean-up
+	delete [] omnisString;
+}
+
+// Get a dynamically allocated qchar* array from a std::wstring
+qchar* OmnisTools::getQCharFromWString(const std::wstring readString, qlong &retLength) {
+	qlong length = readString.size();
+	
+	// Cast-away constness of c_str() pointer 
+	wchar_t* cString = const_cast<wchar_t*>(readString.c_str());
+	
+	qchar* omnisString;
+#if MARKUP_SIZEOFWCHAR == 2
+	// For 2-Byte UTF16 wchar_t* (Typically Windows)
+	// Feed into raw byte data
+	UChar* utf16data = reinterpret_cast<UChar*> (cString);
+	
+	// Convert to UTF-8
+	CHRconvFromUtf16 utf16conv(utf16data, length);
+	length = utf16conv.len();
+	qbyte* utf8data = utf16conv.dataPtr();
+	
+	// Allocate new qchar* string
+	omnisString = new qchar[length];
+	
+	// Convert to Omnis Character field
+	retLength = CHRunicode::utf8ToChar(utf8data, length, omnisString);  // Convert characters into Omnis Char Field
+#else
+	// For 4-Byte UTF32 wchar_t* (Typically Mac and Linux)
+	U32Char* utf32data = reinterpret_cast<U32Char*> (cString);
+	
+	// Convert to UTF-8
+	CHRconvFromUtf32ToChar utf32conv(utf32data, length, qfalse);
+	length = utf32conv.len();
+	retLength = length;
+	omnisString = new qchar(length);
+	OMstrcpy(omnisString, utf32conv.dataPtr()); // Copy string so it lives past the end of this function
+#endif
+	
+	return omnisString;
+}
+
 // Get a std::string from an EXTfldval object
 std::string OmnisTools::getStringFromEXTFldVal(EXTfldval& fVal) {
 	std::string retString;
@@ -106,7 +202,7 @@ std::string OmnisTools::getStringFromEXTFldVal(EXTfldval& fVal) {
 }
 
 // Set an existing EXTfldval object from a std::string
-void OmnisTools::getEXTFldValFromString(EXTfldval& fVal, std::string readString) {
+void OmnisTools::getEXTFldValFromString(EXTfldval& fVal, const std::string readString) {
 	qlong length;
 	qchar* omnisString = getQCharFromString(readString, length);
 	
@@ -117,7 +213,7 @@ void OmnisTools::getEXTFldValFromString(EXTfldval& fVal, std::string readString)
 }
 
 // Get a dynamically allocated qchar* array from a std::string
-qchar* OmnisTools::getQCharFromString(std::string readString, qlong &retLength) {
+qchar* OmnisTools::getQCharFromString(const std::string readString, qlong &retLength) {
 	qlong length = readString.size();
 	
 	// Cast-away constness of c_str() pointer 

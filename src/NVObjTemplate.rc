@@ -5,15 +5,26 @@ BEGIN
 		 1001									"NVObjExample"
 		 1002									"Simple: Example for how to create a non-visual object in Omnis Studio"
 		 
-		 2100									"$squareNum:$squareNum(Number) returns the square of Number"
-		 2101									"$empty:$empty does nothing.  Helps determine object overhead."
+		 2100									"$error:$error(ErrorCode, ErrorDesc, ErrorText, MethodName) is called when an error has occurred. (Override to receive messages)"
+		 2101									"$squareNum:$squareNum(Number) returns the square of Number"
+		 2102									"$empty:$empty does nothing.  Helps determine object overhead."
 		 
 		 3100									"$myProperty:$myproperty returns a number"
 		 
-		 4000									"Number"
+		 4000									"ErrorCode"
+		 4001									"ErrorDesc"
+		 4002									"ErrorText"
+		 4003									"MethodName"
+		 4004									"Number"
 		 
 		23000									"kNVObj"
 		23001									"Category~MyConstant:0:MyConstant:Description of my constant"
+		
+		23100									"Errors~ErrNone:0:ErrNone:No error"
+		23101									"ErrBadMethod:-101:ErrBadMethod:Bad method index (internal error)"
+		23102									"ErrBadParams:-102:ErrBadParams:Invalid or invalid number of paramters have been passed to the method"
+		23103									"ErrMemory:-103:ErrMemory:Out of memory"
+		23104									"ErrNotSupported:-104:ErrNotSupported:The feature is not supported"
 		 
 		31000									"NVObjWndProc"
 END

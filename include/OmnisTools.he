@@ -45,7 +45,17 @@
 #ifndef OMNIS_TOOLS_HE_
 #define OMNIS_TOOLS_HE_
 
+#ifdef ismac
+#undef QTEXT
+#define C_TEXT(_a)	((qoschar *) (L ## _a))
+#else
+#define C_TEXT			QTEXT
+#endif
+
 namespace OmnisTools {
+	
+	// Generic result type for returning error status
+	typedef qlong tResult;
 	
 	// Thread data struct is an ease-of-use tool to keep track of the current context, 
 	// rather than just passing eci everywhere
@@ -66,12 +76,17 @@ namespace OmnisTools {
 	qbool getQBoolFromBool(bool);
 	bool getBoolFromQBool(qbool);
 	
+	// std::wstring/EXTfldval helpers
+	std::wstring getWStringFromEXTFldVal(EXTfldval& fVal);
+	void getEXTFldValFromWString(EXTfldval&, const std::wstring);
+	
 	// std::string/EXTfldval helpers
 	std::string getStringFromEXTFldVal(EXTfldval&);
-	void getEXTFldValFromString(EXTfldval&, std::string);
+	void getEXTFldValFromString(EXTfldval&, const std::string);
 	
 	// std::string/qchar* helpers
-	qchar* getQCharFromString( std::string readString, qlong &retLength );
+	qchar* getQCharFromString( const std::string readString, qlong &retLength );
+	qchar* getQCharFromWString( const std::wstring readString, qlong &retLength );
 	
 	// get ISO 8601 std::string from Date
 	std::string getISO8601DateStringFromEXTFldVal(EXTfldval&);

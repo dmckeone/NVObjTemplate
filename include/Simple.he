@@ -67,8 +67,8 @@ public:
 	virtual qlong canAssignProperty( OmnisTools::tThreadData* pThreadData, qlong propID );
 	
 	// Custom (Your) Methods
-	void methodSquare( OmnisTools::tThreadData* pThreadData, qshort pParamCount );
-	void methodEmpty( OmnisTools::tThreadData* pThreadData, qshort pParamCount );
+	OmnisTools::tResult methodSquare( OmnisTools::tThreadData* pThreadData, qshort pParamCount );
+	OmnisTools::tResult methodEmpty( OmnisTools::tThreadData* pThreadData, qshort pParamCount );
 };
 
 #endif /* SIMPLE_HE_ */

@@ -58,8 +58,9 @@ const static qshort cPropertyMyProperty = 3100;
  **************************************************************************************************/
 
 // This is where the resource # of the methods is defined.  In this project is also used as the Unique ID.
-const static qshort cMethodSquareNum = 2100,
-                    cMethodEmpty     = 2101;
+const static qshort cMethodError     = 2100,
+                    cMethodSquareNum = 2101,
+					cMethodEmpty     = 2102;
 
 /**************************************************************************************************
  **                                 INSTANCE METHODS                                             **
@@ -68,20 +69,26 @@ const static qshort cMethodSquareNum = 2100,
 // Call a method
 qlong NVObjSimple::methodCall( tThreadData* pThreadData )
 {
+	tResult result = METHOD_OK;
 	qshort funcId = (qshort)ECOgetId(pThreadData->mEci);
 	qshort paramCount = ECOgetParamCount(pThreadData->mEci);
 
 	switch( funcId )
 	{
+		case cMethodError:
+			result = METHOD_OK; // Always return ok to prevent circular call to error.
+			break;
 		case cMethodSquareNum:
 			pThreadData->mCurMethodName = "$squareNum";
-			methodSquare(pThreadData, paramCount);
+			result = methodSquare(pThreadData, paramCount);
 			break;
 		case cMethodEmpty:
 			pThreadData->mCurMethodName = "$empty";
-			methodEmpty(pThreadData, paramCount);
+			result = methodEmpty(pThreadData, paramCount);
 			break;
 	}
+	
+	callErrorMethod(pThreadData, result);
 
 	return 0L;
 }
@@ -152,7 +159,11 @@ qlong NVObjSimple::setProperty( tThreadData* pThreadData )
 // 4) Extended flags.  Documentation states, "Must be 0"
 ECOparam cSimpleMethodsParamsTable[] = 
 {
-	4000, fftNumber, 0, 0
+	4000, fftInteger  , 0, 0,
+	4001, fftCharacter, 0, 0,
+	4002, fftCharacter, 0, 0,
+	4003, fftCharacter, 0, 0,
+	4004, fftNumber,    0, 0
 };
 
 // Table of Methods available for Simple
@@ -166,8 +177,9 @@ ECOparam cSimpleMethodsParamsTable[] =
 // 7) Enum Stop (Not sure what this does, 0 = disabled)
 ECOmethodEvent cSimpleMethodsTable[] = 
 {
-	cMethodSquareNum, cMethodSquareNum, fftNumber, 1, &cSimpleMethodsParamsTable[0], 0, 0,
-	cMethodEmpty    , cMethodEmpty    , fftNone  , 0, 0                     , 0, 0
+	cMethodError,     cMethodError,     fftNumber, 4, &cSimpleMethodsParamsTable[0], 0, 0,
+	cMethodSquareNum, cMethodSquareNum, fftNumber, 1, &cSimpleMethodsParamsTable[3], 0, 0,
+	cMethodEmpty    , cMethodEmpty    , fftNone  , 0, 0                            , 0, 0
 };
 
 // List of methods in Simple
@@ -207,11 +219,11 @@ qlong NVObjSimple::returnProperties( tThreadData* pThreadData )
  **************************************************************************************************/
 
 // Simple method that squares the result $method(5.0) = 25.0
-void NVObjSimple::methodSquare( tThreadData* pThreadData, qshort pParamCount )
+tResult NVObjSimple::methodSquare( tThreadData* pThreadData, qshort pParamCount )
 {
 	EXTfldval fvalNumber, fvalReturn;
 	if( pParamCount != 1)
-		return;
+		return ERR_BAD_PARAMS;
 
 	getParamVar(pThreadData, pParamCount, fvalNumber);
 	
@@ -227,8 +239,12 @@ void NVObjSimple::methodSquare( tThreadData* pThreadData, qshort pParamCount )
 
 	// Add a parameter; This actually sets up the return value
 	ECOaddParam(pThreadData->mEci, &fvalReturn);
+	
+	return METHOD_DONE_RETURN;
 }
 
 // Empty method.  Determines call over head for a method
-void NVObjSimple::methodEmpty( tThreadData* pThreadData, qshort pParamCount )
-{ }
+tResult NVObjSimple::methodEmpty( tThreadData* pThreadData, qshort pParamCount )
+{ 
+	return METHOD_DONE_RETURN;
+}

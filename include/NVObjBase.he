@@ -41,9 +41,6 @@
 // Class definition for C++ version of your object
 class NVObjBase
 {
-private:
-protected:
-	qobjinst			mObjInst;
 public:
 	// Static tracking variable
 	static qshort objResourceId;  // This static variable needs to be in all inherited objects
@@ -55,16 +52,52 @@ public:
 	// Object Copying
 	NVObjBase* dup( qlong propID, qobjinst objinst, OmnisTools::tThreadData *pThreadData );
 	virtual void copy( NVObjBase* pObj );
-		
+	
 	// Methods Available and Method Call Handling (These should be overriden by a sub-class)
 	virtual qlong returnMethods( OmnisTools::tThreadData* );
 	virtual qlong methodCall( OmnisTools::tThreadData* );
-
+	
 	// Properties and Property Call Handling (These should be overriden by a sub-class)
 	virtual qlong returnProperties( OmnisTools::tThreadData* );
 	virtual qlong getProperty( OmnisTools::tThreadData* );
 	virtual qlong setProperty( OmnisTools::tThreadData* );
 	virtual qlong canAssignProperty( OmnisTools::tThreadData*, qlong propID );
+	
+protected:
+	qobjinst mObjInst;
+	
+	// Generic error handler (requires $error method)
+	void callErrorMethod( OmnisTools::tThreadData* pThreadData, OmnisTools::tResult pError );
+	
+	// Error translation (Object Specific)
+	virtual std::string translateObjectError( OmnisTools::tResult pError );
+	
+private:
+	// Error translation (Built-in Types)
+	std::string translateDefaultError( OmnisTools::tResult pError );
 };
+
+// Built-in error constants
+const OmnisTools::tResult 
+ERR_OK              = 0,
+ERR_RETURN_ZERO	    =-1,
+ERR_METHOD_FAILED	=-2,
+ERR_BAD_METHOD	    =-101,
+ERR_BAD_PARAMS	    =-102,
+ERR_NOMEMORY		=-103,
+ERR_NOT_SUPPORTED   =-104,
+ERR_BAD_CALCULATION =-105,
+ERR_NOT_IMPLEMENTED =-999;
+
+// Method constants
+const OmnisTools::tResult 
+METHOD_DONE_RETURN = 2,
+METHOD_OK          = 1,
+METHOD_FAILED      = 0;
+
+// Property constants
+const OmnisTools::tResult 
+PROP_OK     = 1,
+PROP_FAILED = 0;
 
 #endif /* NV_OBJ_BASE_HE_ */
