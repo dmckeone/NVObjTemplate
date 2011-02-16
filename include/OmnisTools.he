@@ -77,7 +77,10 @@ namespace OmnisTools {
 	qbool getParamLong( tThreadData* pThreadData, qshort pParamNum, qlong& pOutInteger );
 	
 	// List helpers
-	qbool isList( EXTfldval& pFVal, qbool pCanBeRow = qfalse);
+	qbool isList( EXTfldval& fVal, qbool pCanBeRow = qfalse);
+	
+	// Convenience method to return the type of an EXTfldval
+	ffttype getType( EXTfldval& );
 	
 	// qbool/bool helpers
 	qbool getQBoolFromBool(bool);
@@ -94,6 +97,11 @@ namespace OmnisTools {
 	// std::string/qchar* helpers
 	qchar* getQCharFromString( const std::string readString, qlong &retLength );
 	qchar* getQCharFromWString( const std::wstring readString, qlong &retLength );
+	
+	// C++ type helpers
+	bool getBoolFromEXTFldVal(EXTfldval& fVal);
+	int getIntFromEXTFldVal(EXTfldval& fVal);
+	long getLongFromEXTFldVal(EXTfldval& fVal);
 	
 	// get ISO 8601 std::string from Date
 	std::string getISO8601DateStringFromEXTFldVal(EXTfldval&);

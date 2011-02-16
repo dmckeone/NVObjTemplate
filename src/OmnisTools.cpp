@@ -137,6 +137,12 @@ qbool OmnisTools::getParamLong( tThreadData* pThreadData, qshort pParamNum, qlon
 	return qfalse;
 }
 
+// Convenience method to return the type of an EXTfldval
+ffttype OmnisTools::getType( EXTfldval& fVal ) {
+	ffttype fft; fVal.getType(fft);
+	return fft;
+}
+
 // Get a qbool from a C++ boolean
 qbool OmnisTools::getQBoolFromBool(bool b) {
 	if (b == true) {
@@ -309,6 +315,29 @@ qchar* OmnisTools::getQCharFromString(const std::string readString, qlong &retLe
 	retLength = CHRunicode::utf8ToChar(utf8data, length, omnisString);  // Convert characters into Omnis Char Field
 	
 	return omnisString;
+}
+
+// Return a C++ bool from an EXTfldval
+bool OmnisTools::getBoolFromEXTFldVal(EXTfldval& fVal) {
+	qbool omnBool;
+	fVal.getBool(&omnBool);
+	return getBoolFromQBool(omnBool);
+}
+
+// Return a C++ int from an EXTfldval
+int OmnisTools::getIntFromEXTFldVal(EXTfldval& fVal) {
+	qlong omnInt = fVal.getLong();
+	
+	if (omnInt < INT_MIN || omnInt > INT_MAX) {
+		qlong omnInt = 0; // zero out any numbers that exceed
+	}
+	
+	return static_cast<int>( omnInt );
+}
+
+// Return a C++ long from an EXTfldval
+long OmnisTools::getLongFromEXTFldVal(EXTfldval& fVal) {
+	return static_cast<long>( fVal.getLong() );
 }
 
 // Get an ISO 8601 Formatted Date String from EXTFldVal
