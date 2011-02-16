@@ -79,6 +79,64 @@ qbool OmnisTools::isList( EXTfldval& pFVal, qbool pCanBeRow ) {
 	return ( (fft == fftList || (pCanBeRow && fft == fftRow)) ? qtrue : qfalse );
 }
 
+// Get a qbool parameter for a specific parameter #
+qbool OmnisTools::getParamBool( tThreadData* pThreadData, qshort pParamNum, qbool& pOutBool ) {
+	EXTParamInfo* param = ECOfindParamNum( pThreadData->mEci, pParamNum );
+	if ( !param )
+		return qfalse;
+	
+	EXTfldval fval(reinterpret_cast<qfldval>(param->mData));
+	
+	ffttype fft; fval.getType(fft);
+	if ( fft != fftInteger && fft != fftBoolean && fft != fftConstant )
+		return qfalse;
+	
+	qlong x = fval.getLong();
+	if ( x != 0 && x != 1 )
+		return qfalse;
+	
+	pOutBool = qbool(x != 0);
+	return qtrue;
+}
+
+// Get a qshort parameter for a specific parameter #
+qbool OmnisTools::getParamShort( tThreadData* pThreadData, qshort pParamNum, qshort& pOutShort ) {
+	
+	qlong longVal;
+	if( getParamLong(pThreadData, pParamNum, longVal) != qtrue )
+		return qfalse;
+	
+	if (longVal < 0 || longVal > 255)
+		return qfalse;
+	
+	pOutShort = static_cast<qshort>(longVal);
+	return qtrue;	
+}
+
+// Get a qlong parameter for a specific parameter #
+qbool OmnisTools::getParamLong( tThreadData* pThreadData, qshort pParamNum, qlong& pOutInteger ) {
+	EXTParamInfo* param = ECOfindParamNum( pThreadData->mEci, pParamNum );
+	if ( !param )
+		return qfalse;
+	
+	EXTfldval fval(reinterpret_cast<qfldval>(param->mData));
+	
+	ffttype fft; fval.getType(fft);
+	if ( fft == fftCharacter )
+	{
+		strxxx& s_num = fval.getChar();
+		if ( stringToQlong( s_num, pOutInteger ) )
+			return qtrue;
+	}
+	else if ( fft == fftInteger || fft == fftBoolean || fft == fftConstant || fft == fftNumber )
+	{
+		pOutInteger = fval.getLong();
+		return qtrue;
+	}
+	
+	return qfalse;
+}
+
 // Get a qbool from a C++ boolean
 qbool OmnisTools::getQBoolFromBool(bool b) {
 	if (b == true) {

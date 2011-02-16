@@ -72,6 +72,9 @@ namespace OmnisTools {
 	qbool getParamVar( tThreadData* pThreadData, qshort pParamNum, EXTfldval& pOutVar );
 	qbool getParamVar( EXTCompInfo* pEci, qshort pParamNum, EXTfldval& pOutVar );
 	qbool getParamList( tThreadData* pThreadData, qshort pParamNum, EXTqlist& pOutList, qbool pCanBeRow = qfalse );
+	qbool getParamBool( tThreadData* pThreadData, qshort pParamNum, qbool& pOutBool );
+	qbool getParamShort( tThreadData* pThreadData, qshort pParamNum, qshort& pOutShort );
+	qbool getParamLong( tThreadData* pThreadData, qshort pParamNum, qlong& pOutInteger );
 	
 	// List helpers
 	qbool isList( EXTfldval& pFVal, qbool pCanBeRow = qfalse);
