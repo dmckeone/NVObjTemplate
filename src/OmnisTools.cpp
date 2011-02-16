@@ -57,6 +57,28 @@ qbool OmnisTools::getParamVar( EXTCompInfo* pEci, qshort pParamNum, EXTfldval& p
 	return qtrue;
 }
 
+// Get a list for a specific parameter from the EXTCompInfo
+qbool OmnisTools::getParamList( tThreadData* pThreadData, qshort pParamNum, EXTqlist& pOutList, qbool pCanBeRow) {
+	
+	EXTParamInfo* param = ECOfindParamNum( pThreadData->mEci, pParamNum );
+	if ( !param ) 
+		return qfalse;
+	
+	EXTfldval fval(reinterpret_cast<qfldval>(param->mData));
+	if ( isList(fval,pCanBeRow) )
+		return qfalse;
+	
+	fval.getList(&pOutList,qfalse);
+	
+	return qtrue;
+}
+
+// Check if an EXTfldval is a list or, optionally, a row.
+qbool OmnisTools::isList( EXTfldval& pFVal, qbool pCanBeRow ) {
+	ffttype fft; pFVal.getType(fft);
+	return ( (fft == fftList || (pCanBeRow && fft == fftRow)) ? qtrue : qfalse );
+}
+
 // Get a qbool from a C++ boolean
 qbool OmnisTools::getQBoolFromBool(bool b) {
 	if (b == true) {
