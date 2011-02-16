@@ -38,6 +38,14 @@
 #include "OmnisTools.he"
 #include <sstream>
 
+#if ! defined(MARKUP_SIZEOFWCHAR)
+  #if __SIZEOF_WCHAR_T__ == 4 || __WCHAR_MAX__ > 0x10000
+    #define MARKUP_SIZEOFWCHAR 4
+  #else
+    #define MARKUP_SIZEOFWCHAR 2
+  #endif
+#endif
+
 // Get a parameter from the thread data
 qbool OmnisTools::getParamVar( tThreadData* pThreadData, qshort pParamNum, EXTfldval& pOutVar )
 {
@@ -65,7 +73,7 @@ qbool OmnisTools::getParamList( tThreadData* pThreadData, qshort pParamNum, EXTq
 		return qfalse;
 	
 	EXTfldval fval(reinterpret_cast<qfldval>(param->mData));
-	if ( isList(fval,pCanBeRow) )
+	if ( isList(fval,pCanBeRow) != qtrue )
 		return qfalse;
 	
 	fval.getList(&pOutList,qfalse);
