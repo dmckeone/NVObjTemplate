@@ -69,7 +69,7 @@ protected:
 	// Generic error handler (requires $error method)
 	void callErrorMethod( OmnisTools::tThreadData* pThreadData, OmnisTools::tResult pError );
 	
-	// Error translation (Object Specific)
+	// Error translation (Object Specific) -- Override in subclasses for specific errors
 	virtual std::string translateObjectError( OmnisTools::tResult pError );
 	
 private:

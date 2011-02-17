@@ -142,7 +142,7 @@ std::string NVObjBase::translateDefaultError( OmnisTools::tResult pError ) {
 	return txt;
 }
 
-// Object specific error codes
+// Object specific error codes (Should be overridden when object specific error codes are specified)
 std::string NVObjBase::translateObjectError( OmnisTools::tResult pError ) { 
 	return std::string(""); 
 }

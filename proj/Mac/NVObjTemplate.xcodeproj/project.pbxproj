@@ -305,7 +305,6 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = $OMNIS_LIB_PATH/complib/u_complib.framework/Headers/carbnuni.h;
-				GCC_VERSION = 4.0;
 				GENERATE_PKGINFO_FILE = YES;
 				HEADER_SEARCH_PATHS = (
 					/Developer/Headers/FlatCarbon,
@@ -331,7 +330,6 @@
 					$PROJECT_DIR,
 					$PROJECT_DIR/English.lproj,
 				);
-				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
 				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = u_xcomp;
 				ZERO_LINK = NO;
