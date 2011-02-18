@@ -262,7 +262,7 @@ qchar* OmnisTools::getQCharFromWString(const std::wstring readString, qlong &ret
 	CHRconvFromUtf32ToChar utf32conv(utf32data, length, qfalse);
 	length = utf32conv.len();
 	retLength = length;
-	omnisString = new qchar(length);
+	omnisString = new qchar[length];
 	OMstrcpy(omnisString, utf32conv.dataPtr()); // Copy string so it lives past the end of this function
 #endif
 	
