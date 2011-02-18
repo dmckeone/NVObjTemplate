@@ -100,8 +100,13 @@ namespace OmnisTools {
 	
 	// C++ type helpers
 	bool getBoolFromEXTFldVal(EXTfldval& fVal);
+	void getEXTFldValFromBool(EXTfldval& fVal, bool);
 	int getIntFromEXTFldVal(EXTfldval& fVal);
+	void getEXTFldValFromInt(EXTfldval& fVal, int);
 	long getLongFromEXTFldVal(EXTfldval& fVal);
+	void getEXTFldValFromLong(EXTfldval& fVal, long);
+	double getDoubleFromEXTFldVal(EXTfldval& fVal);
+	void getEXTFldValFromDouble(EXTfldval& fVal, double);
 	
 	// get ISO 8601 std::string from Date
 	std::string getISO8601DateStringFromEXTFldVal(EXTfldval&);

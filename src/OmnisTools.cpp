@@ -332,6 +332,12 @@ bool OmnisTools::getBoolFromEXTFldVal(EXTfldval& fVal) {
 	return getBoolFromQBool(omnBool);
 }
 
+// Get an EXTfldval for a C++ bool
+void OmnisTools::getEXTFldValFromBool(EXTfldval& fVal, bool b) {
+	qbool omBool = getQBoolFromBool(b);
+	fVal.setBool(omBool);
+}
+
 // Return a C++ int from an EXTfldval
 int OmnisTools::getIntFromEXTFldVal(EXTfldval& fVal) {
 	qlong omnInt = fVal.getLong();
@@ -343,9 +349,35 @@ int OmnisTools::getIntFromEXTFldVal(EXTfldval& fVal) {
 	return static_cast<int>( omnInt );
 }
 
+// Get an EXTfldval for a C++ int
+void OmnisTools::getEXTFldValFromInt(EXTfldval& fVal, int i) {
+	fVal.setLong(static_cast<qlong>(i));
+}
+
 // Return a C++ long from an EXTfldval
 long OmnisTools::getLongFromEXTFldVal(EXTfldval& fVal) {
 	return static_cast<long>( fVal.getLong() );
+}
+
+// Get an EXTfldval for a C++ long
+void OmnisTools::getEXTFldValFromLong(EXTfldval& fVal, long l) {
+	fVal.setLong(static_cast<qlong>(l));
+}
+
+// Return a C++ long from an EXTfldval
+double OmnisTools::getDoubleFromEXTFldVal(EXTfldval& fVal) {
+	qreal omnReal;
+	qshort dp = dpDefault;
+	fVal.getNum(omnReal, dp);
+	
+	return static_cast<double>( omnReal );
+}
+
+// Get an EXTfldval for a C++ double
+void OmnisTools::getEXTFldValFromDouble(EXTfldval& fVal, double d) {
+	qreal omnReal = static_cast<qreal>(d);
+	qshort dp = dpDefault;
+	fVal.setNum(omnReal, dp);
 }
 
 // Get an ISO 8601 Formatted Date String from EXTFldVal
