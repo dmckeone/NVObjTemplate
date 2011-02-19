@@ -17,6 +17,10 @@ BEGIN
 		 4003									"MethodName"
 		 4004									"Number"
 		 
+		 5000									"$staticEmpty:$staticEmpty(Integer) static method that returns kTrue."
+		 
+		 5900									"Integer"
+		 
 		23000									"kNVObj"
 		23001									"Category~MyConstant:0:MyConstant:Description of my constant"
 		

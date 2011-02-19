@@ -37,6 +37,7 @@
  */
 
 #include "NVObjTemplate.he"
+#include "Static.he"
 #include "Simple.he"
 
 using OmnisTools::tThreadData;
@@ -198,7 +199,14 @@ extern "C" qlong OMNISWNDPROC NVObjWndProc(HWND hwnd, LPARAM Msg, WPARAM wParam,
 			}
 		}
 			
-		// ECM_GETMETHODNAME - this is sent by OMNIS to retrieve a list of methods
+		// ECM_GETSTATICOBJECT - this is sent by OMNIS to retrieve a list of static methods
+		case ECM_GETSTATICOBJECT:
+		{
+			tThreadData threadData(eci);
+			return returnStaticMethods( &threadData );
+		}
+			
+		// ECM_GETMETHODNAME - this is sent by OMNIS to retrieve a list of methods for object instances
 		case ECM_GETMETHODNAME:
 		{			
 			tThreadData threadData(eci);
@@ -215,12 +223,17 @@ extern "C" qlong OMNISWNDPROC NVObjWndProc(HWND hwnd, LPARAM Msg, WPARAM wParam,
 		// ECM_METHODCALL - this is sent by OMNIS to call a method in the non-visual object
 		case ECM_METHODCALL:
 		{
+			tThreadData threadData(eci);
+			
 			void* obj = ECOfindNVObject( eci->mOmnisInstance, lParam );
 			if ( NULL != obj )
 			{ 
-				tThreadData threadData(eci);
+				// Method from Object Instance
 				NVObjBase* nvObj = reinterpret_cast<NVObjBase*>(obj);
 				return nvObj->methodCall(&threadData);
+			} else {
+				// Static method
+				return staticMethodCall( &threadData );
 			}
 			
 			return qfalse;

@@ -240,6 +240,10 @@
 				RelativePath="..\..\src\Simple.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\..\src\Static.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"
@@ -268,6 +272,10 @@
 			</File>
 			<File
 				RelativePath="..\..\include\Simple.he"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\Static.he"
 				>
 			</File>
 		</Filter>

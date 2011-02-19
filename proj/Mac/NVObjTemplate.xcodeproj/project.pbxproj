@@ -31,6 +31,8 @@
 		B02360D311765D3A001236FE /* NVObjTemplate.he in Resources */ = {isa = PBXBuildFile; fileRef = B02360D011765D3A001236FE /* NVObjTemplate.he */; };
 		B02360D411765D3A001236FE /* Simple.he in Resources */ = {isa = PBXBuildFile; fileRef = B02360D111765D3A001236FE /* Simple.he */; };
 		B02361D111765E35001236FE /* NVObjTemplate.rc in Resources */ = {isa = PBXBuildFile; fileRef = B02361D011765E35001236FE /* NVObjTemplate.rc */; };
+		B03C1D41130EDAE600661BC0 /* Static.he in Resources */ = {isa = PBXBuildFile; fileRef = B03C1D40130EDAE500661BC0 /* Static.he */; };
+		B03C1D50130EDBCB00661BC0 /* Static.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B03C1D4F130EDBCB00661BC0 /* Static.cpp */; };
 		B0A46050125F550F003A3050 /* OmnisTools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0A4604F125F550F003A3050 /* OmnisTools.cpp */; };
 		B0A46052125F5517003A3050 /* OmnisTools.he in Resources */ = {isa = PBXBuildFile; fileRef = B0A46051125F5517003A3050 /* OmnisTools.he */; };
 /* End PBXBuildFile section */
@@ -71,6 +73,8 @@
 		B02360D011765D3A001236FE /* NVObjTemplate.he */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = NVObjTemplate.he; path = ../../include/NVObjTemplate.he; sourceTree = SOURCE_ROOT; };
 		B02360D111765D3A001236FE /* Simple.he */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Simple.he; path = ../../include/Simple.he; sourceTree = SOURCE_ROOT; };
 		B02361D011765E35001236FE /* NVObjTemplate.rc */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; name = NVObjTemplate.rc; path = ../../src/NVObjTemplate.rc; sourceTree = SOURCE_ROOT; };
+		B03C1D40130EDAE500661BC0 /* Static.he */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Static.he; path = ../../include/Static.he; sourceTree = SOURCE_ROOT; };
+		B03C1D4F130EDBCB00661BC0 /* Static.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Static.cpp; path = ../../src/Static.cpp; sourceTree = SOURCE_ROOT; };
 		B0A4604F125F550F003A3050 /* OmnisTools.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OmnisTools.cpp; path = ../../src/OmnisTools.cpp; sourceTree = SOURCE_ROOT; };
 		B0A46051125F5517003A3050 /* OmnisTools.he */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = OmnisTools.he; path = ../../include/OmnisTools.he; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -125,6 +129,7 @@
 				B02360C911765D30001236FE /* NVObjBase.cpp */,
 				B02360CA11765D30001236FE /* NVObjTemplate.cpp */,
 				B02360CB11765D30001236FE /* Simple.cpp */,
+				B03C1D4F130EDBCB00661BC0 /* Static.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -144,6 +149,7 @@
 				B02360CF11765D3A001236FE /* NVObjBase.he */,
 				B02360D011765D3A001236FE /* NVObjTemplate.he */,
 				B02360D111765D3A001236FE /* Simple.he */,
+				B03C1D40130EDAE500661BC0 /* Static.he */,
 			);
 			name = Headers;
 			sourceTree = "<group>";
@@ -207,6 +213,7 @@
 				B02360D411765D3A001236FE /* Simple.he in Resources */,
 				B02361D111765E35001236FE /* NVObjTemplate.rc in Resources */,
 				B0A46052125F5517003A3050 /* OmnisTools.he in Resources */,
+				B03C1D41130EDAE600661BC0 /* Static.he in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,6 +228,7 @@
 				B02360CD11765D30001236FE /* NVObjTemplate.cpp in Sources */,
 				B02360CE11765D30001236FE /* Simple.cpp in Sources */,
 				B0A46050125F550F003A3050 /* OmnisTools.cpp in Sources */,
+				B03C1D50130EDBCB00661BC0 /* Static.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
