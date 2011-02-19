@@ -63,6 +63,9 @@ http://www.tigerlogic.com/tigerlogic/omnis/products/components/buildyourown.jsp
 ../include/Simple.he
 ../src/Simple.cpp    : These files hold an example implementation of a non-visual object, Simple.  Simple has 1 property and 2 methods.  
 
+../include/Static.he
+../src/Static.cpp    : These files hold an example implementation of static methods.  There is 1 static method, $staticEmpty().
+
 ../src/NVObjTemplate.rc : This file holds the "resources" -- string table for method, property, and constant descriptions -- that Omnis uses for the component.  (Resource 32000 is the name of the entry point method in NVObjTemplate.cpp)
 
 ../src/NVObjTemplate.def : This file holds the entry point name for Windows components (Should match resource 32000 in NVObjTemplate.rc)
