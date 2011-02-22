@@ -367,7 +367,7 @@ void OmnisTools::getEXTFldValFromLong(EXTfldval& fVal, long l) {
 // Return a C++ long from an EXTfldval
 double OmnisTools::getDoubleFromEXTFldVal(EXTfldval& fVal) {
 	qreal omnReal;
-	qshort dp = dpDefault;
+	qshort dp = dpFmask;
 	fVal.getNum(omnReal, dp);
 	
 	return static_cast<double>( omnReal );
@@ -376,7 +376,7 @@ double OmnisTools::getDoubleFromEXTFldVal(EXTfldval& fVal) {
 // Get an EXTfldval for a C++ double
 void OmnisTools::getEXTFldValFromDouble(EXTfldval& fVal, double d) {
 	qreal omnReal = static_cast<qreal>(d);
-	qshort dp = dpDefault;
+	qshort dp = dpFmask;
 	fVal.setNum(omnReal, dp);
 }
 
