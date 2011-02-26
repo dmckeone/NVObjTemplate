@@ -146,17 +146,20 @@ qbool OmnisTools::getParamLong( tThreadData* pThreadData, qshort pParamNum, qlon
 }
 
 // Convenience method to return the type of an EXTfldval
-ffttype OmnisTools::getType( EXTfldval& fVal ) {
-	ffttype fft; fVal.getType(fft);
-	return fft;
+OmnisTools::FieldValType OmnisTools::getType( EXTfldval& fVal ) {
+	
+	OmnisTools::FieldValType retType;
+	fVal.getType(retType.valType, &retType.valSubType);
+	
+	return retType;
 }
 
 // Get a qbool from a C++ boolean
 qbool OmnisTools::getQBoolFromBool(bool b) {
 	if (b == true) {
-		return 2;
+		return qtrue;
 	} else if (b == false) {
-		return 1;
+		return qfalse;
 	} else {
 		return 0;
 	}
@@ -164,9 +167,9 @@ qbool OmnisTools::getQBoolFromBool(bool b) {
 
 // Get a C++ boolean from a qbool
 bool OmnisTools::getBoolFromQBool(qbool qb) {
-	if (qb == 2) {
+	if (qb == qtrue) {
 		return true;
-	} else if (qb == 1) {
+	} else if (qb == qfalse) {
 		return false;
 	} else {
 		return NULL;
@@ -356,7 +359,8 @@ void OmnisTools::getEXTFldValFromInt(EXTfldval& fVal, int i) {
 
 // Return a C++ long from an EXTfldval
 long OmnisTools::getLongFromEXTFldVal(EXTfldval& fVal) {
-	return static_cast<long>( fVal.getLong() );
+	long retLong = static_cast<long>(fVal.getLong());
+	return retLong;
 }
 
 // Get an EXTfldval for a C++ long
@@ -370,7 +374,9 @@ double OmnisTools::getDoubleFromEXTFldVal(EXTfldval& fVal) {
 	qshort dp = dpFmask;
 	fVal.getNum(omnReal, dp);
 	
-	return static_cast<double>( omnReal );
+	double retDbl = static_cast<double>(omnReal);
+	
+	return retDbl;
 }
 
 // Get an EXTfldval for a C++ double

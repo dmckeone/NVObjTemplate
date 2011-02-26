@@ -68,6 +68,12 @@ namespace OmnisTools {
 		std::string mExtraErrorText;
 	}; 
 	
+	// Struct for managing EXTfldval types
+	struct FieldValType {
+		ffttype valType;
+		qshort valSubType;
+	};
+	
 	// Parameter helpers
 	qbool getParamVar( tThreadData* pThreadData, qshort pParamNum, EXTfldval& pOutVar );
 	qbool getParamVar( EXTCompInfo* pEci, qshort pParamNum, EXTfldval& pOutVar );
@@ -80,7 +86,7 @@ namespace OmnisTools {
 	qbool isList( EXTfldval& fVal, qbool pCanBeRow = qfalse);
 	
 	// Convenience method to return the type of an EXTfldval
-	ffttype getType( EXTfldval& );
+	FieldValType getType(EXTfldval&);
 	
 	// qbool/bool helpers
 	qbool getQBoolFromBool(bool);
@@ -116,17 +122,46 @@ namespace OmnisTools {
 	// Generic method for retrieving an object by it's instance
 	template <class T>
 	T* getObjForInstance(tThreadData* pThreadData, qobjinst objinst) {
+		if (!objinst) {
+			return 0;
+		}
+		
 		objinst = reinterpret_cast<qobjinst>(ECOgetNVObject(objinst)); // Attempt to get super class for NV Objects that are inherited by Omnis objects
+		if (!objinst) {
+			return 0;
+		}
+		
 		LPARAM objinstPtr = reinterpret_cast<LPARAM>(objinst);
 		void* omnisPtr = ECOfindNVObject(pThreadData->mEci->mOmnisInstance, objinstPtr);
+		if (!omnisPtr) {
+			return 0;
+		}
+		
 		T* retPtr = reinterpret_cast<T*>( omnisPtr );
 		return retPtr;
+	}
+	
+	// Generic method for setting an EXTfldval with an object
+	template <class T>
+	void getEXTFldValForObj(EXTfldval& fVal, T* obj) {
+		if (!obj)
+			return;
+		
+		fVal.setObjInst( obj->mObjInst, qtrue );
 	}
 	
 	// Generic method for retrieving an object from it's EXTfldval
 	template <class T>
 	T* getObjForEXTfldval(tThreadData* pThreadData, EXTfldval &fVal) {
-		qobjinst objinst = fVal.getObjInst(qfalse);
+		qobjinst objinst;
+		if (getType(fVal).valType == fftObject) {
+			objinst = fVal.getObjInst(qfalse);
+		} else if (getType(fVal).valType == fftObjref) {
+			objinst = fVal.getObjRef();
+		} else {
+			// Unknown type
+			return 0;
+		}
 		
 		return getObjForInstance<T>(pThreadData, objinst);
 	}
