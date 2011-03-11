@@ -50,7 +50,7 @@
 				Optimization="3"
 				InlineFunctionExpansion="1"
 				FavorSizeOrSpeed="1"
-				AdditionalIncludeDirectories="..\..\include;&quot;$(OMNIS_LIB_PATH)\COMPLIB&quot;"
+				AdditionalIncludeDirectories="&quot;$(BOOST_ROOT)&quot;;..\..\include;&quot;$(OMNIS_LIB_PATH)\COMPLIB&quot;"
 				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS;iswin32;isXCOMPLIB;NO_STRICT;isunicode;UNICODE;_CRT_SECURE_NO_DEPRECATE;_CRT_NON_CONFORMING_SWPRINTFS;_CRT_NONSTDC_NO_DEPRECATE;_UNICODE"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -82,9 +82,9 @@
 				OutputFile="$(outdir)\$(ProjectName).dll"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="$(OMNIS_LIB_PATH)\ULIBS"
+				AdditionalLibraryDirectories="&quot;$(BOOST_ROOT)\stage\lib&quot;;&quot;$(OMNIS_LIB_PATH)\ULIBS&quot;"
 				IgnoreDefaultLibraryNames="libc.lib"
-				ModuleDefinitionFile="..\..\src\$(ProjectName).def"
+				ModuleDefinitionFile="..\..\resource\$(ProjectName).def"
 				ProgramDatabaseFile="$(IntDir)/$(ProjectName).pdb"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
@@ -149,10 +149,10 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\include;&quot;$(OMNIS_LIB_PATH)\COMPLIB&quot;"
+				AdditionalIncludeDirectories="&quot;$(BOOST_ROOT)&quot;;..\..\include;&quot;$(OMNIS_LIB_PATH)\COMPLIB&quot;"
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS;iswin32;isXCOMPLIB;NO_STRICT;isunicode;_UNICODE;UNICODE;_CRT_SECURE_NO_DEPRECATE;_CRT_NON_CONFORMING_SWPRINTFS;_CRT_NONSTDC_NO_DEPRECATE"
 				MinimalRebuild="true"
-				RuntimeLibrary="2"
+				RuntimeLibrary="3"
 				StructMemberAlignment="2"
 				TreatWChar_tAsBuiltInType="false"
 				ForceConformanceInForLoopScope="false"
@@ -181,9 +181,9 @@
 				OutputFile="$(outdir)/$(ProjectName).dll"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="$(OMNIS_LIB_PATH)\ULIBS"
+				AdditionalLibraryDirectories="&quot;$(BOOST_ROOT)\stage\lib&quot;;&quot;$(OMNIS_LIB_PATH)\ULIBS&quot;"
 				IgnoreDefaultLibraryNames="libc.lib"
-				ModuleDefinitionFile="..\..\src\$(ProjectName).def"
+				ModuleDefinitionFile="..\..\resource\$(ProjectName).def"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(IntDir)/$(ProjectName).pdb"
 				SubSystem="2"
@@ -250,7 +250,7 @@
 			Filter="ico;cur;bmp;dlg;rc2;rct;bin;cnt;rtf;gif;jpg;jpeg;jpe"
 			>
 			<File
-				RelativePath="..\..\src\NVObjTemplate.rc"
+				RelativePath="..\..\resource\NVObjTemplate.rc"
 				>
 			</File>
 		</Filter>
