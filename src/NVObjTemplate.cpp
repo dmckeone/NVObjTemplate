@@ -50,11 +50,6 @@ using OmnisTools::tThreadData;
 #define VERSION_MAJOR 1
 #define VERSION_MINOR 0
 
-// Resources for constants
-const static qshort kConstResourcePrefix = 23000,
-                    kConstResourceStart  = 23001,
-                    kConstResourceEnd    = 23104;
-
 // Resource # for object group.
 const static qshort cNVObjGroup = 1001;
 

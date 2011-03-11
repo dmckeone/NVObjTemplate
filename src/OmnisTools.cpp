@@ -37,13 +37,22 @@
 
 #include "OmnisTools.he"
 #include <sstream>
+#include <iostream>
+#include <map>
+#include <boost/lexical_cast.hpp>
 
+using boost::lexical_cast;
+using boost::bad_lexical_cast;
+
+#ifdef ismac
+#define MARKUP_SIZEOFWCHAR 4
+#endif
 #if ! defined(MARKUP_SIZEOFWCHAR)
-  #if __SIZEOF_WCHAR_T__ == 4 || __WCHAR_MAX__ > 0x10000
-    #define MARKUP_SIZEOFWCHAR 4
-  #else
-    #define MARKUP_SIZEOFWCHAR 2
-  #endif
+#if __SIZEOF_WCHAR_T__ == 4 || __WCHAR_MAX__ > 0x10000
+#define MARKUP_SIZEOFWCHAR 4
+#else
+#define MARKUP_SIZEOFWCHAR 2
+#endif
 #endif
 
 // Get a parameter from the thread data
@@ -59,13 +68,12 @@ qbool OmnisTools::getParamVar( EXTCompInfo* pEci, qshort pParamNum, EXTfldval& p
 	if( !param )
 		return qfalse;
 	
-	pOutVar.setFldVal((qfldval)param->mData);
+	pOutVar.setFldVal(reinterpret_cast<qfldval>(param->mData));
 	pOutVar.setReadOnly( qfalse );
 	
 	return qtrue;
 }
 
-// Get a list for a specific parameter from the EXTCompInfo
 qbool OmnisTools::getParamList( tThreadData* pThreadData, qshort pParamNum, EXTqlist& pOutList, qbool pCanBeRow) {
 	
 	EXTParamInfo* param = ECOfindParamNum( pThreadData->mEci, pParamNum );
@@ -73,7 +81,7 @@ qbool OmnisTools::getParamList( tThreadData* pThreadData, qshort pParamNum, EXTq
 		return qfalse;
 	
 	EXTfldval fval(reinterpret_cast<qfldval>(param->mData));
-	if ( isList(fval,pCanBeRow) != qtrue )
+	if ( isList(fval,pCanBeRow) != qtrue)
 		return qfalse;
 	
 	fval.getList(&pOutList,qfalse);
@@ -81,13 +89,11 @@ qbool OmnisTools::getParamList( tThreadData* pThreadData, qshort pParamNum, EXTq
 	return qtrue;
 }
 
-// Check if an EXTfldval is a list or, optionally, a row.
 qbool OmnisTools::isList( EXTfldval& pFVal, qbool pCanBeRow ) {
 	ffttype fft; pFVal.getType(fft);
 	return ( (fft == fftList || (pCanBeRow && fft == fftRow)) ? qtrue : qfalse );
 }
 
-// Get a qbool parameter for a specific parameter #
 qbool OmnisTools::getParamBool( tThreadData* pThreadData, qshort pParamNum, qbool& pOutBool ) {
 	EXTParamInfo* param = ECOfindParamNum( pThreadData->mEci, pParamNum );
 	if ( !param )
@@ -107,7 +113,6 @@ qbool OmnisTools::getParamBool( tThreadData* pThreadData, qshort pParamNum, qboo
 	return qtrue;
 }
 
-// Get a qshort parameter for a specific parameter #
 qbool OmnisTools::getParamShort( tThreadData* pThreadData, qshort pParamNum, qshort& pOutShort ) {
 	
 	qlong longVal;
@@ -121,7 +126,6 @@ qbool OmnisTools::getParamShort( tThreadData* pThreadData, qshort pParamNum, qsh
 	return qtrue;	
 }
 
-// Get a qlong parameter for a specific parameter #
 qbool OmnisTools::getParamLong( tThreadData* pThreadData, qshort pParamNum, qlong& pOutInteger ) {
 	EXTParamInfo* param = ECOfindParamNum( pThreadData->mEci, pParamNum );
 	if ( !param )
@@ -234,14 +238,26 @@ void OmnisTools::getEXTFldValFromWString(EXTfldval& fVal, const std::wstring rea
 	delete [] omnisString;
 }
 
+// Set an existing EXTfldval object from a std::wstring
+void OmnisTools::getEXTFldValFromWChar(EXTfldval& fVal, const wchar_t* readChar) {
+    std::wstring readString;
+    if (readChar == 0)
+        readString = L"";
+    else
+        readString = readChar;
+    
+    getEXTFldValFromWString(fVal, readString);
+}
+
 // Get a dynamically allocated qchar* array from a std::wstring
 qchar* OmnisTools::getQCharFromWString(const std::wstring readString, qlong &retLength) {
 	qlong length = readString.size();
 	
 	// Cast-away constness of c_str() pointer 
 	wchar_t* cString = const_cast<wchar_t*>(readString.c_str());
+    
+	qchar* omnisString = new qchar(readString.length());
 	
-	qchar* omnisString;
 #if MARKUP_SIZEOFWCHAR == 2
 	// For 2-Byte UTF16 wchar_t* (Typically Windows)
 	// Feed into raw byte data
@@ -263,8 +279,8 @@ qchar* OmnisTools::getQCharFromWString(const std::wstring readString, qlong &ret
 	
 	// Convert to UTF-8
 	CHRconvFromUtf32ToChar utf32conv(utf32data, length, qfalse);
-	length = utf32conv.len();
-	retLength = length;
+	retLength = length = utf32conv.len();
+	
 	omnisString = new qchar[length];
 	OMstrcpy(omnisString, utf32conv.dataPtr()); // Copy string so it lives past the end of this function
 #endif
@@ -309,6 +325,17 @@ void OmnisTools::getEXTFldValFromString(EXTfldval& fVal, const std::string readS
 	delete [] omnisString;
 }
 
+// Set an existing EXTfldval object from a std::wstring
+void OmnisTools::getEXTFldValFromChar(EXTfldval& fVal, const char* readChar) {
+    std::string readString;
+    if (readChar == 0)
+        readString = "";
+    else
+        readString = readChar;
+    
+    getEXTFldValFromString(fVal, readString);
+}
+
 // Get a dynamically allocated qchar* array from a std::string
 qchar* OmnisTools::getQCharFromString(const std::string readString, qlong &retLength) {
 	qlong length = readString.size();
@@ -330,14 +357,26 @@ qchar* OmnisTools::getQCharFromString(const std::string readString, qlong &retLe
 
 // Return a C++ bool from an EXTfldval
 bool OmnisTools::getBoolFromEXTFldVal(EXTfldval& fVal) {
-	qbool omnBool;
-	fVal.getBool(&omnBool);
-	return getBoolFromQBool(omnBool);
+	qshort omnBool;
+	omnBool = fVal.getBool();
+	switch (omnBool) {
+		case 2:
+			return true;
+		case 1:
+			return false;
+		default:
+			return false;
+	}
 }
 
 // Get an EXTfldval for a C++ bool
 void OmnisTools::getEXTFldValFromBool(EXTfldval& fVal, bool b) {
-	qbool omBool = getQBoolFromBool(b);
+	qshort omBool;
+	if (b==true) 
+        omBool = 2;
+	else if (b==false)
+        omBool = 1;
+    
 	fVal.setBool(omBool);
 }
 
@@ -346,7 +385,7 @@ int OmnisTools::getIntFromEXTFldVal(EXTfldval& fVal) {
 	qlong omnInt = fVal.getLong();
 	
 	if (omnInt < INT_MIN || omnInt > INT_MAX) {
-		qlong omnInt = 0; // zero out any numbers that exceed
+        omnInt = 0; // zero out any numbers that exceed
 	}
 	
 	return static_cast<int>( omnInt );
@@ -370,8 +409,7 @@ void OmnisTools::getEXTFldValFromLong(EXTfldval& fVal, long l) {
 
 // Return a C++ long from an EXTfldval
 double OmnisTools::getDoubleFromEXTFldVal(EXTfldval& fVal) {
-	qreal omnReal;
-	qshort dp = dpFmask;
+	qreal omnReal; qshort dp;
 	fVal.getNum(omnReal, dp);
 	
 	double retDbl = static_cast<double>(omnReal);
@@ -384,6 +422,102 @@ void OmnisTools::getEXTFldValFromDouble(EXTfldval& fVal, double d) {
 	qreal omnReal = static_cast<qreal>(d);
 	qshort dp = dpFmask;
 	fVal.setNum(omnReal, dp);
+}
+
+// Get an EXTfldval for a defined constant
+void OmnisTools::getEXTFldValFromConstant(EXTfldval& fVal, qlong constID, qlong prefixID) {
+    
+	// Check for prefix
+	str80 prefixRead;
+	str255 constantValue;
+	if (prefixID > 0) {
+		// Read string from resource, and assign it to return parameter
+		RESloadString(gInstLib,prefixID,prefixRead);
+		constantValue.concat(prefixRead);
+	}
+    
+	// Read complete resource string
+	str255 resourceValue;
+	RESloadString(gInstLib,constID,resourceValue);
+	
+	// Translate into std::wstring for easy substring
+	EXTfldval convVar;
+	convVar.setChar(resourceValue, dpDefault);
+	std::wstring resourceString = getWStringFromEXTFldVal(convVar);
+	
+	// Get substring between tilde (sometimes used for categories) and first colon.
+	int tildePos = resourceString.find(L"~") + 1;
+	int colonPos = resourceString.find(L":");
+	
+	std::wstring constantString = resourceString.substr(tildePos,colonPos-tildePos);
+	getEXTFldValFromWString(convVar, constantString);
+	
+	// Add constant to EXTfldval
+	constantValue.concat(convVar.getChar());
+	fVal.setConstant(constantValue);
+}
+
+// Get an integer for an EXTfldval where the EXTfldval contains a constant
+static std::map<std::wstring,int> constCache;
+int OmnisTools::getIntFromEXTFldVal(EXTfldval& fVal, qlong firstID, qlong lastID) {
+	
+	if (getType(fVal).valType == fftInteger) {
+		return getIntFromEXTFldVal(fVal);
+	} else if (getType(fVal).valType == fftConstant) {
+		return getIntFromEXTFldVal(fVal);
+	}
+	
+	int retNum = -1;
+	// Get string that needs to be matched
+	std::wstring matchString = getWStringFromEXTFldVal(fVal);
+	
+	// Get map iterator for searching
+	std::map<std::wstring,int>::iterator it;
+	it = constCache.find(matchString);
+	if (it != constCache.end()) {
+		retNum = it->second;
+	} else {
+		// Unable to find match, must loop constants in range and look for it
+		int tildePos, colonPos, numPos, constNum;
+		EXTfldval convVar;
+		str255 resourceValue;
+		std::wstring resourceMatch, resourceString;
+		std::wstring numString = L"";
+		
+		for( int i = firstID; i <= lastID; ++i) {
+			// Load resource and put into std::wstring for easy substr
+			RESloadString(gInstLib,i,resourceValue);
+			convVar.setChar(resourceValue, dpDefault);
+			resourceString = getWStringFromEXTFldVal(convVar);
+			tildePos = resourceString.find(L"~") + 1;
+			colonPos = resourceString.find(L":");
+			if (colonPos != -1) { // All constants should have colons.  If it doesn't then don't interpret the line
+				resourceMatch = resourceString.substr(tildePos, colonPos-tildePos);
+				
+				// While looping add items to the const cache
+				numPos = colonPos + 1;
+				numString.clear();
+				while (resourceString[numPos] != L':' && numPos < static_cast<int>(resourceString.length())) {
+					numString += resourceString[numPos++];
+				}
+				try {
+					constNum = lexical_cast<int>(numString);
+				}
+				catch(bad_lexical_cast &) {
+					constNum = -1;
+				}
+				
+				constCache[resourceMatch] = constNum;  // Add constant to cache
+			}
+		}
+		
+		// Locate constant now that all the constants have been cached
+		it = constCache.find(matchString);
+		if (it != constCache.end()) {
+			retNum = it->second;
+		}
+	}
+	return retNum;
 }
 
 // Get an ISO 8601 Formatted Date String from EXTFldVal
@@ -428,5 +562,27 @@ std::string OmnisTools::getISO8601DateStringFromEXTFldVal(EXTfldval& fVal) {
 	
 	return retString;
 }
+
+qbool OmnisTools::ensurePosixPath(EXTfldval& pathVal) {
+#ifdef ismac
+	str255 posixCheck, posixPath;
+	qshort def = dpFcharacter;
+	posixCheck = pathVal.getChar().cString();
+	qlong err;
+	std::wstring path = getWStringFromEXTFldVal(pathVal);
+	
+	if (path[0] != L'/') {
+		err = ECOconvertHFSToPosix(posixCheck, posixPath);
+		if (err != 0) {
+			return qfalse;
+		}
+		pathVal.setChar(posixPath, def);
+	}
+#endif
+	
+	return qtrue;
+}
+
+
 
 

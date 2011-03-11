@@ -38,9 +38,11 @@
 //Omnis includes
 #include <extcomp.he>
 #include <chrbasic.he>
+#include <boost/shared_ptr.hpp>
 
 //Std Library includes
 #include <string>
+#include <map>
 
 #ifndef OMNIS_TOOLS_HE_
 #define OMNIS_TOOLS_HE_
@@ -82,11 +84,10 @@ namespace OmnisTools {
 	qbool getParamShort( tThreadData* pThreadData, qshort pParamNum, qshort& pOutShort );
 	qbool getParamLong( tThreadData* pThreadData, qshort pParamNum, qlong& pOutInteger );
 	
-	// List helpers
-	qbool isList( EXTfldval& fVal, qbool pCanBeRow = qfalse);
-	
-	// Convenience method to return the type of an EXTfldval
 	FieldValType getType(EXTfldval&);
+	
+	// List helpers
+	qbool isList( EXTfldval& pFVal, qbool pCanBeRow = qfalse);
 	
 	// qbool/bool helpers
 	qbool getQBoolFromBool(bool);
@@ -95,10 +96,12 @@ namespace OmnisTools {
 	// std::wstring/EXTfldval helpers
 	std::wstring getWStringFromEXTFldVal(EXTfldval& fVal);
 	void getEXTFldValFromWString(EXTfldval&, const std::wstring);
+    void getEXTFldValFromWChar(EXTfldval&, const wchar_t*);
 	
 	// std::string/EXTfldval helpers
 	std::string getStringFromEXTFldVal(EXTfldval&);
 	void getEXTFldValFromString(EXTfldval&, const std::string);
+    void getEXTFldValFromChar(EXTfldval&, const char*);
 	
 	// std::string/qchar* helpers
 	qchar* getQCharFromString( const std::string readString, qlong &retLength );
@@ -113,31 +116,41 @@ namespace OmnisTools {
 	void getEXTFldValFromLong(EXTfldval& fVal, long);
 	double getDoubleFromEXTFldVal(EXTfldval& fVal);
 	void getEXTFldValFromDouble(EXTfldval& fVal, double);
+	void getEXTFldValFromConstant(EXTfldval& fVal, qlong constID, qlong prefixID = 0);
+	int getIntFromEXTFldVal(EXTfldval& fVal, qlong firstConstID, qlong lastConstID);
 	
 	// get ISO 8601 std::string from Date
 	std::string getISO8601DateStringFromEXTFldVal(EXTfldval&);
+	
+	// POSIX/HFS Paths
+	qbool ensurePosixPath(EXTfldval&);
 	
 	// ************ TEMPLATES ************ //
 	
 	// Generic method for retrieving an object by it's instance
 	template <class T>
-	T* getObjForInstance(tThreadData* pThreadData, qobjinst objinst) {
-		if (!objinst) {
+	T* getObjForInstance(tThreadData* pThreadData, qobjinst inst) {
+		if (!inst) {
 			return 0;
 		}
 		
-		objinst = reinterpret_cast<qobjinst>(ECOgetNVObject(objinst)); // Attempt to get super class for NV Objects that are inherited by Omnis objects
-		if (!objinst) {
+		inst = (qobjinst) ECOgetNVObject(inst); // Attempt to get super class for NV Objects that are inherited by Omnis objects
+		if (!inst) {
 			return 0;
 		}
 		
-		LPARAM objinstPtr = reinterpret_cast<LPARAM>(objinst);
-		void* omnisPtr = ECOfindNVObject(pThreadData->mEci->mOmnisInstance, objinstPtr);
+		LPARAM lparamPtr = (LPARAM) inst;
+		void* omnisPtr = ECOfindNVObject(pThreadData->mEci->mOmnisInstance, lparamPtr);
 		if (!omnisPtr) {
 			return 0;
 		}
 		
+		// Verify that the correct object was retrieved
 		T* retPtr = reinterpret_cast<T*>( omnisPtr );
+		if (retPtr->objResourceId != T::objResourceId ) {
+			return 0;
+		}
+		
 		return retPtr;
 	}
 	
@@ -147,23 +160,24 @@ namespace OmnisTools {
 		if (!obj)
 			return;
 		
-		fVal.setObjInst( obj->mObjInst, qtrue );
+		qobjinst inst = obj->getInstance();
+		fVal.setObjInst( inst, qtrue );
 	}
 	
 	// Generic method for retrieving an object from it's EXTfldval
 	template <class T>
 	T* getObjForEXTfldval(tThreadData* pThreadData, EXTfldval &fVal) {
-		qobjinst objinst;
+		qobjinst inst;
 		if (getType(fVal).valType == fftObject) {
-			objinst = fVal.getObjInst(qfalse);
+			inst = fVal.getObjInst(qfalse);
 		} else if (getType(fVal).valType == fftObjref) {
-			objinst = fVal.getObjRef();
+			inst = fVal.getObjRef();
 		} else {
 			// Unknown type
 			return 0;
 		}
 		
-		return getObjForInstance<T>(pThreadData, objinst);
+		return getObjForInstance<T>(pThreadData, inst);
 	}
 	
 	// Generic method for creating a new object in the Omnis pool
@@ -191,4 +205,4 @@ namespace OmnisTools {
 	}
 }
 	
-#endif OMNIS_TOOLS_HE_
+#endif // OMNIS_TOOLS_HE_

@@ -43,6 +43,11 @@
 #ifndef NV_OBJ_TEMPLATE_HE
 #define NV_OBJ_TEMPLATE_HE
 
+// Resources for constants
+const static qshort kConstResourcePrefix = 23000,
+					kConstResourceStart  = 23001,
+                    kConstResourceEnd    = 23104;
+
 class NVObjBase;  // To prevent circular include reference with NVObjBase.he declare this here.
 
 NVObjBase* createObject( qlong propID, qobjinst objinst, OmnisTools::tThreadData* );

@@ -24,13 +24,13 @@
 		96CA4E550907E8CC00C234AA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		96CA4E5A0907E8CC00C234AA /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08EA7FFBFE8413EDC02AAC07 /* Carbon.framework */; };
 		96CA4E660907EB0700C234AA /* u_complib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96CA4E650907EB0700C234AA /* u_complib.framework */; };
+		B01F974C132A7CFE0031F767 /* NVObjTemplate.rc in Resources */ = {isa = PBXBuildFile; fileRef = B01F974B132A7CFE0031F767 /* NVObjTemplate.rc */; };
 		B02360CC11765D30001236FE /* NVObjBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B02360C911765D30001236FE /* NVObjBase.cpp */; };
 		B02360CD11765D30001236FE /* NVObjTemplate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B02360CA11765D30001236FE /* NVObjTemplate.cpp */; };
 		B02360CE11765D30001236FE /* Simple.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B02360CB11765D30001236FE /* Simple.cpp */; };
 		B02360D211765D3A001236FE /* NVObjBase.he in Resources */ = {isa = PBXBuildFile; fileRef = B02360CF11765D3A001236FE /* NVObjBase.he */; };
 		B02360D311765D3A001236FE /* NVObjTemplate.he in Resources */ = {isa = PBXBuildFile; fileRef = B02360D011765D3A001236FE /* NVObjTemplate.he */; };
 		B02360D411765D3A001236FE /* Simple.he in Resources */ = {isa = PBXBuildFile; fileRef = B02360D111765D3A001236FE /* Simple.he */; };
-		B02361D111765E35001236FE /* NVObjTemplate.rc in Resources */ = {isa = PBXBuildFile; fileRef = B02361D011765E35001236FE /* NVObjTemplate.rc */; };
 		B03C1D41130EDAE600661BC0 /* Static.he in Resources */ = {isa = PBXBuildFile; fileRef = B03C1D40130EDAE500661BC0 /* Static.he */; };
 		B03C1D50130EDBCB00661BC0 /* Static.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B03C1D4F130EDBCB00661BC0 /* Static.cpp */; };
 		B0A46050125F550F003A3050 /* OmnisTools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0A4604F125F550F003A3050 /* OmnisTools.cpp */; };
@@ -66,13 +66,13 @@
 		08EA7FFBFE8413EDC02AAC07 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		96CA4E610907E8CC00C234AA /* NVObjTemplate.u_xcomp */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NVObjTemplate.u_xcomp; sourceTree = BUILT_PRODUCTS_DIR; };
 		96CA4E650907EB0700C234AA /* u_complib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = u_complib.framework; path = /Library/Frameworks/u_complib.framework; sourceTree = "<absolute>"; };
+		B01F974B132A7CFE0031F767 /* NVObjTemplate.rc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = NVObjTemplate.rc; path = ../../resource/NVObjTemplate.rc; sourceTree = "<group>"; };
 		B02360C911765D30001236FE /* NVObjBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NVObjBase.cpp; path = ../../src/NVObjBase.cpp; sourceTree = SOURCE_ROOT; };
 		B02360CA11765D30001236FE /* NVObjTemplate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NVObjTemplate.cpp; path = ../../src/NVObjTemplate.cpp; sourceTree = SOURCE_ROOT; };
 		B02360CB11765D30001236FE /* Simple.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Simple.cpp; path = ../../src/Simple.cpp; sourceTree = SOURCE_ROOT; };
 		B02360CF11765D3A001236FE /* NVObjBase.he */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = NVObjBase.he; path = ../../include/NVObjBase.he; sourceTree = SOURCE_ROOT; };
 		B02360D011765D3A001236FE /* NVObjTemplate.he */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = NVObjTemplate.he; path = ../../include/NVObjTemplate.he; sourceTree = SOURCE_ROOT; };
 		B02360D111765D3A001236FE /* Simple.he */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Simple.he; path = ../../include/Simple.he; sourceTree = SOURCE_ROOT; };
-		B02361D011765E35001236FE /* NVObjTemplate.rc */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; name = NVObjTemplate.rc; path = ../../src/NVObjTemplate.rc; sourceTree = SOURCE_ROOT; };
 		B03C1D40130EDAE500661BC0 /* Static.he */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Static.he; path = ../../include/Static.he; sourceTree = SOURCE_ROOT; };
 		B03C1D4F130EDBCB00661BC0 /* Static.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Static.cpp; path = ../../src/Static.cpp; sourceTree = SOURCE_ROOT; };
 		B0A4604F125F550F003A3050 /* OmnisTools.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OmnisTools.cpp; path = ../../src/OmnisTools.cpp; sourceTree = SOURCE_ROOT; };
@@ -116,7 +116,7 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				B02361D011765E35001236FE /* NVObjTemplate.rc */,
+				B01F974B132A7CFE0031F767 /* NVObjTemplate.rc */,
 				089C167DFE841241C02AAC07 /* InfoPlist.strings */,
 			);
 			name = Resources;
@@ -211,9 +211,9 @@
 				B02360D211765D3A001236FE /* NVObjBase.he in Resources */,
 				B02360D311765D3A001236FE /* NVObjTemplate.he in Resources */,
 				B02360D411765D3A001236FE /* Simple.he in Resources */,
-				B02361D111765E35001236FE /* NVObjTemplate.rc in Resources */,
 				B0A46052125F5517003A3050 /* OmnisTools.he in Resources */,
 				B03C1D41130EDAE600661BC0 /* Static.he in Resources */,
+				B01F974C132A7CFE0031F767 /* NVObjTemplate.rc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,90 +257,14 @@
 		96CA4E5E0907E8CC00C234AA /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUILD_VARIANTS = normal;
-				COPY_PHASE_STRIP = NO;
-				DEPLOYMENT_LOCATION = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(OMNIS_LIB_PATH)/complib";
-				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				GCC_PREFIX_HEADER = $OMNIS_LIB_PATH/complib/u_complib.framework/Headers/carbnuni.h;
-				GENERATE_PKGINFO_FILE = YES;
-				HEADER_SEARCH_PATHS = (
-					/Developer/Headers/FlatCarbon,
-					"$(OMNIS_LIB_PATH)/complib/u_complib.framework/Headers",
-					"$(BOOST_ROOT)",
-				);
-				INFOPLIST_FILE = $PROJECT_DIR/Info.plist;
-				INSTALL_PATH = "$(OMNIS_XCOMP_PATH)";
-				LIBRARY_SEARCH_PATHS = "$(BOOST_ROOT)/stage/lib";
-				LIBRARY_STYLE = DYNAMIC;
-				OTHER_CFLAGS = (
-					"-fpermissive",
-					"-fno-for-scope",
-					"-fshort-wchar",
-					"-Dismach_o",
-					"-Dismach-o",
-				);
-				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
-				PRODUCT_NAME = NVObjTemplate;
-				RESMERGER_SOURCES_FORK = data;
-				REZ_SEARCH_PATHS = (
-					$PROJECT_DIR/../src,
-					/Developer/Headers/FlatCarbon,
-					$PROJECT_DIR,
-					$PROJECT_DIR/English.lproj,
-				);
-				WRAPPER_EXTENSION = u_xcomp;
-				ZERO_LINK = NO;
 			};
 			name = Development;
 		};
 		96CA4E5F0907E8CC00C234AA /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
-				COPY_PHASE_STRIP = YES;
-				DEPLOYMENT_LOCATION = YES;
-				DSTROOT = /;
-				FRAMEWORK_SEARCH_PATHS = "$(OMNIS_LIB_PATH)/complib";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				GCC_PREFIX_HEADER = $OMNIS_LIB_PATH/complib/u_complib.framework/Headers/carbnuni.h;
-				GENERATE_PKGINFO_FILE = YES;
-				HEADER_SEARCH_PATHS = (
-					/Developer/Headers/FlatCarbon,
-					"$(OMNIS_LIB_PATH)/complib/u_complib.framework/Headers",
-					"$(BOOST_ROOT)",
-				);
-				INFOPLIST_FILE = $PROJECT_DIR/Info.plist;
-				INSTALL_PATH = "$(PROJECT_DIR)/../../deploy/Mac/$(EFFECTIVE_PLATFORM_NAME)";
-				LIBRARY_SEARCH_PATHS = "$(BOOST_ROOT)/stage/lib";
-				LIBRARY_STYLE = DYNAMIC;
-				OTHER_CFLAGS = (
-					"-fpermissive",
-					"-fno-for-scope",
-					"-fshort-wchar",
-					"-Dismach_o",
-					"-Dismach-o",
-				);
-				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
-				PRODUCT_NAME = NVObjTemplate;
-				RESMERGER_SOURCES_FORK = data;
-				REZ_SEARCH_PATHS = (
-					/Developer/Headers/FlatCarbon,
-					$PROJECT_DIR,
-					$PROJECT_DIR/English.lproj,
-				);
-				SKIP_INSTALL = NO;
-				WRAPPER_EXTENSION = u_xcomp;
-				ZERO_LINK = NO;
 			};
 			name = Deployment;
 		};
@@ -348,62 +272,90 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
-				DSTROOT = /;
-				FRAMEWORK_SEARCH_PATHS = (
-					$OMNIS_LIB_PATH/compilb,
-					$OMNIS_LIB_PATH/frameworks,
+				DEPLOYMENT_LOCATION = YES;
+				DSTROOT = "$(OMNIS_XCOMP_PATH)";
+				FRAMEWORK_SEARCH_PATHS = "$(OMNIS_LIB_PATH)/complib";
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREFIX_HEADER = "$(OMNIS_LIB_PATH)/complib/u_complib.framework/Headers/carbnuni.h";
+				GCC_VERSION = 4.2;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_PKGINFO_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					$PROJECT_DIR/../../include,
+					/Developer/Headers/FlatCarbon,
+					"$(BOOST_ROOT)",
+					"$(OMNIS_LIB_PATH)/complib/u_complib.framework/Headers",
 				);
-				LIBRARY_STYLE = DYNAMIC;
+				INFOPLIST_FILE = $PROJECT_DIR/Info.plist;
+				INSTALL_PATH = /;
+				LIBRARY_SEARCH_PATHS = "$(BOOST_ROOT)/stage/lib";
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				OTHER_CFLAGS = (
+					"-Dismach_o",
+					"-Dismach-o",
+				);
+				PRODUCT_NAME = NVObjTemplate;
+				REZ_SEARCH_PATHS = (
+					$PROJECT_DIR/../../resource,
+					/Developer/Headers/FlatCarbon,
+					$PROJECT_DIR/English.lproj,
+				);
+				VALID_ARCHS = "i386 x86_64 ppc";
+				WRAPPER_EXTENSION = u_xcomp;
 			};
 			name = Development;
 		};
 		96CF456008FBABD1003AA3FE /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					$OMNIS_LIB_PATH/compilb,
-					$OMNIS_LIB_PATH/frameworks,
+				ARCHS = (
+					i386,
+					ppc,
 				);
+				DEPLOYMENT_LOCATION = YES;
+				DSTROOT = "$(PROJECT_DIR)/../../deploy/Mac";
+				FRAMEWORK_SEARCH_PATHS = "$(OMNIS_LIB_PATH)/complib";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PREFIX_HEADER = "$(OMNIS_LIB_PATH)/complib/u_complib.framework/Headers/carbnuni.h";
+				GCC_VERSION = 4.2;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_PKGINFO_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					$PROJECT_DIR/../../include,
+					/Developer/Headers/FlatCarbon,
+					"$(BOOST_ROOT)",
+					"$(OMNIS_LIB_PATH)/complib/u_complib.framework/Headers",
+				);
+				INFOPLIST_FILE = $PROJECT_DIR/Info.plist;
+				INSTALL_PATH = /;
+				LIBRARY_SEARCH_PATHS = "$(BOOST_ROOT)/stage/lib";
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				OTHER_CFLAGS = (
+					"-Dismach_o",
+					"-Dismach-o",
+				);
+				PRODUCT_NAME = NVObjTemplate;
+				REZ_SEARCH_PATHS = (
+					$PROJECT_DIR/../../resource,
+					/Developer/Headers/FlatCarbon,
+					$PROJECT_DIR/English.lproj,
+				);
+				VALID_ARCHS = "i386 x86_64 ppc";
+				WRAPPER_EXTENSION = u_xcomp;
 			};
 			name = Deployment;
 		};
 		96D355F40908DD80006B6436 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ReleaseBuild;
-				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 			};
 			name = Development;
 		};
 		96D355F50908DD80006B6436 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COPY_PHASE_STRIP = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ReleaseBuild;
-				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 			};
 			name = Deployment;
 		};

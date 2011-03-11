@@ -1,9 +1,10 @@
 # Build Directory
-proj/Mac/build/*
+proj/Mac/*.xcodeproj/xcuserdata
 proj/Windows/build/*
 proj/Windows/build/debug/*
 deploy/*
 
+*.xcworkspace
 *.pbxuser
 *.mode1v3
 *.user
