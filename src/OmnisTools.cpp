@@ -355,6 +355,50 @@ qchar* OmnisTools::getQCharFromString(const std::string readString, qlong &retLe
 	return omnisString;
 }
 
+// Get a str15 object for a character constant (No string if it doesn't correspond to the conditions)
+str15 OmnisTools::initStr15(const char* in){
+    str15 theString;
+    qshort length = strlen(in);
+    if (length > 0 && length <= 15) {
+        theString.setUtf8((qbyte*) in, strlen(in));
+    }
+    
+    return theString;
+} 
+
+// Get a str31 object for a character constant (No string if it doesn't correspond to the conditions)
+str31 OmnisTools::initStr31(const char* in){
+    str31 theString;
+    qshort length = strlen(in);
+    if (length > 0 && length <= 31) {
+        theString.setUtf8((qbyte*) in, strlen(in));
+    }
+    
+    return theString;
+} 
+
+// Get a str80 object for a character constant (No string if it doesn't correspond to the conditions)
+str80 OmnisTools::initStr80(const char* in){
+    str80 theString;
+    qshort length = strlen(in);
+    if (length > 0 && length <= 80) {
+        theString.setUtf8((qbyte*) in, strlen(in));
+    }
+    
+    return theString;
+} 
+
+// Get a str255 object for a character constant (No string if it doesn't correspond to the conditions)
+str255 OmnisTools::initStr255(const char* in) {
+    str255 theString;
+    qshort length = strlen(in);
+    if (length > 0 && length <= 255) {
+        theString.setUtf8((qbyte*) in, strlen(in));
+    }
+    
+    return theString;
+} 
+
 // Return a C++ bool from an EXTfldval
 bool OmnisTools::getBoolFromEXTFldVal(EXTfldval& fVal) {
 	qshort omnBool;

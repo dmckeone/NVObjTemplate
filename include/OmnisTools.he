@@ -47,13 +47,6 @@
 #ifndef OMNIS_TOOLS_HE_
 #define OMNIS_TOOLS_HE_
 
-#ifdef ismac
-#undef QTEXT
-#define C_TEXT(_a)	((qoschar *) (L ## _a))
-#else
-#define C_TEXT			QTEXT
-#endif
-
 namespace OmnisTools {
 	
 	// Generic result type for returning error status
@@ -107,6 +100,12 @@ namespace OmnisTools {
 	qchar* getQCharFromString( const std::string readString, qlong &retLength );
 	qchar* getQCharFromWString( const std::wstring readString, qlong &retLength );
 	
+    // strxxx helpers
+    str15 initStr15(const char* in);
+    str31 initStr31(const char* in);
+    str80 initStr80(const char* in);
+    str255 initStr255(const char* in);
+    
 	// C++ type helpers
 	bool getBoolFromEXTFldVal(EXTfldval& fVal);
 	void getEXTFldValFromBool(EXTfldval& fVal, bool);

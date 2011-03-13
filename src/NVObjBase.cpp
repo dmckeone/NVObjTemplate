@@ -99,7 +99,7 @@ void NVObjBase::callErrorMethod( tThreadData* pThreadData, tResult pError )
 		getEXTFldValFromString(params[3], pThreadData->mCurMethodName); // MethodName
 	
 	// Call $error method
-	str31 s_error(C_TEXT("$error"));
+	str31 s_error(initStr31("$error"));
 	ECOdoMethod( mObjInst, &s_error, params, 4 );
 }
 
