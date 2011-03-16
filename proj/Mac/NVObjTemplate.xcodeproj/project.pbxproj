@@ -302,6 +302,7 @@
 					/Developer/Headers/FlatCarbon,
 					$PROJECT_DIR/English.lproj,
 				);
+				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
 				VALID_ARCHS = "i386 x86_64 ppc";
 				WRAPPER_EXTENSION = u_xcomp;
 			};
@@ -344,6 +345,7 @@
 					/Developer/Headers/FlatCarbon,
 					$PROJECT_DIR/English.lproj,
 				);
+				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
 				VALID_ARCHS = "i386 x86_64 ppc";
 				WRAPPER_EXTENSION = u_xcomp;
 			};
