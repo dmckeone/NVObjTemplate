@@ -373,7 +373,7 @@
 				96CA4E5F0907E8CC00C234AA /* Deployment */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Deployment;
 		};
 		96CF455E08FBABD1003AA3FE /* Build configuration list for PBXProject "NVObjTemplate" */ = {
 			isa = XCConfigurationList;
@@ -382,7 +382,7 @@
 				96CF456008FBABD1003AA3FE /* Deployment */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Deployment;
 		};
 		96D355F30908DD80006B6436 /* Build configuration list for PBXAggregateTarget "ReleaseBuild" */ = {
 			isa = XCConfigurationList;
@@ -391,7 +391,7 @@
 				96D355F50908DD80006B6436 /* Deployment */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Deployment;
 		};
 /* End XCConfigurationList section */
 	};
