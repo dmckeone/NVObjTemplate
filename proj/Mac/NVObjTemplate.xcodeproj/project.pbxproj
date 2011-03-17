@@ -285,8 +285,8 @@
 				HEADER_SEARCH_PATHS = (
 					$PROJECT_DIR/../../include,
 					/Developer/Headers/FlatCarbon,
-					"$(BOOST_ROOT)",
 					"$(OMNIS_LIB_PATH)/complib/u_complib.framework/Headers",
+					"$(BOOST_ROOT)",
 				);
 				INFOPLIST_FILE = $PROJECT_DIR/Info.plist;
 				INSTALL_PATH = /;
@@ -328,8 +328,8 @@
 				HEADER_SEARCH_PATHS = (
 					$PROJECT_DIR/../../include,
 					/Developer/Headers/FlatCarbon,
-					"$(BOOST_ROOT)",
 					"$(OMNIS_LIB_PATH)/complib/u_complib.framework/Headers",
+					"$(BOOST_ROOT)",
 				);
 				INFOPLIST_FILE = $PROJECT_DIR/Info.plist;
 				INSTALL_PATH = /;

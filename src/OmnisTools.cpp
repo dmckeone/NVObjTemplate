@@ -39,14 +39,14 @@
 #include <sstream>
 #include <iostream>
 #include <map>
-#include <boost/lexical_cast.hpp>
 
-using boost::lexical_cast;
-using boost::bad_lexical_cast;
+#ifdef USE_BOOST
+  #include <boost/lexical_cast.hpp>
 
-#ifdef ismac
-#define MARKUP_SIZEOFWCHAR 4
+  using boost::lexical_cast;
+  using boost::bad_lexical_cast;
 #endif
+
 #if ! defined(MARKUP_SIZEOFWCHAR)
 #if __SIZEOF_WCHAR_T__ == 4 || __WCHAR_MAX__ > 0x10000
 #define MARKUP_SIZEOFWCHAR 4
@@ -502,6 +502,7 @@ void OmnisTools::getEXTFldValFromConstant(EXTfldval& fVal, qlong constID, qlong 
 }
 
 // Get an integer for an EXTfldval where the EXTfldval contains a constant
+#ifdef USE_BOOST
 static std::map<std::wstring,int> constCache;
 int OmnisTools::getIntFromEXTFldVal(EXTfldval& fVal, qlong firstID, qlong lastID) {
 	
@@ -563,6 +564,7 @@ int OmnisTools::getIntFromEXTFldVal(EXTfldval& fVal, qlong firstID, qlong lastID
 	}
 	return retNum;
 }
+#endif // USE_BOOST
 
 // Get an ISO 8601 Formatted Date String from EXTFldVal
 std::string OmnisTools::getISO8601DateStringFromEXTFldVal(EXTfldval& fVal) {

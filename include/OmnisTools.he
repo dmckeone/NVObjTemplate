@@ -38,7 +38,11 @@
 //Omnis includes
 #include <extcomp.he>
 #include <chrbasic.he>
-#include <boost/shared_ptr.hpp>
+
+#define USE_BOOST
+#ifdef USE_BOOST
+  #include <boost/shared_ptr.hpp>
+#endif
 
 //Std Library includes
 #include <string>
@@ -115,8 +119,11 @@ namespace OmnisTools {
 	void getEXTFldValFromLong(EXTfldval& fVal, long);
 	double getDoubleFromEXTFldVal(EXTfldval& fVal);
 	void getEXTFldValFromDouble(EXTfldval& fVal, double);
-	void getEXTFldValFromConstant(EXTfldval& fVal, qlong constID, qlong prefixID = 0);
+
+    void getEXTFldValFromConstant(EXTfldval& fVal, qlong constID, qlong prefixID = 0);
+#ifdef USE_BOOST
 	int getIntFromEXTFldVal(EXTfldval& fVal, qlong firstConstID, qlong lastConstID);
+#endif
 	
 	// get ISO 8601 std::string from Date
 	std::string getISO8601DateStringFromEXTFldVal(EXTfldval&);
