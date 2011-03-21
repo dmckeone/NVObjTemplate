@@ -1,10 +1,10 @@
 # Build Directory
-proj/Mac/*.xcodeproj/xcuserdata
+proj/Mac/*.xcodeproj/xcuserdata/*
+proj/Mac/*.xcodeproj/*.xcworkspace/xcuserdata/*
 proj/Windows/build/*
 proj/Windows/build/debug/*
 deploy/*
 
-*.xcworkspace
 *.pbxuser
 *.mode1v3
 *.user
@@ -39,3 +39,7 @@ deploy/*
 *.lai
 *.la
 *.a
+
+# Omnis Libraries
+*.lbs
+*.lbr
