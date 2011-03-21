@@ -82,6 +82,19 @@ NVObjBase* createObject( qlong propID, qobjinst objinst, tThreadData *pThreadDat
 	}
 }
 
+// Copy an Omnis object (and it's associated C++ object) in a type-safe way
+void copyObject( qlong propID, objCopyInfo* copyInfo, tThreadData *pThreadData ) {
+    using OmnisTools::copyNVObj;
+    
+    switch (propID) {
+        case cNVObjSimple:
+            copyNVObj<NVObjSimple>(propID, copyInfo, pThreadData);
+            break;
+        default:
+            break;
+    }
+}
+
 // Delete the proper C++ object instance
 void removeObject( qlong propID, NVObjBase* nvObj ) {
 	switch( propID ) {
@@ -176,22 +189,8 @@ extern "C" qlong OMNISWNDPROC NVObjWndProc(HWND hwnd, LPARAM Msg, WPARAM wParam,
 			tThreadData threadData(eci);
 			objCopyInfo* copyInfo = (objCopyInfo*)lParam;
 			qlong propID = eci->mCompId;  // Get ID of object
-			LPARAM source = reinterpret_cast<LPARAM>(ECOgetNVObject( (qobjinst) copyInfo->mSourceObject));
 			
-			NVObjBase* src = (NVObjBase*)ECOfindNVObject( eci->mOmnisInstance, source );
-			if( src )
-			{
-				LPARAM destination = reinterpret_cast<LPARAM>(ECOgetNVObject( (qobjinst) copyInfo->mDestinationObject));
-				
-				NVObjBase* dest = (NVObjBase*)ECOfindNVObject( eci->mOmnisInstance, destination );
-				if( !dest )
-				{
-					dest = src->dup(propID, (qobjinst)copyInfo->mDestinationObject, &threadData);
-					ECOinsertNVObject( eci->mOmnisInstance, copyInfo->mDestinationObject, dest );
-				} else {
-					dest->copy( src );
-				}
-			}
+            copyObject(propID, copyInfo, &threadData);
 		}
 			
 		// ECM_GETSTATICOBJECT - this is sent by OMNIS to retrieve a list of static methods

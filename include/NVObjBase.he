@@ -63,9 +63,8 @@ public:
 	virtual qlong setProperty( OmnisTools::tThreadData* );
 	virtual qlong canAssignProperty( OmnisTools::tThreadData*, qlong propID );
 	
+    qobjinst getInstance() { return mObjInst; }
 protected:
-	qobjinst mObjInst;
-	
 	// Generic error handler (requires $error method)
 	void callErrorMethod( OmnisTools::tThreadData* pThreadData, OmnisTools::tResult pError );
 	
@@ -73,6 +72,8 @@ protected:
 	virtual std::string translateObjectError( OmnisTools::tResult pError );
 	
 private:
+    qobjinst mObjInst;
+    
 	// Error translation (Built-in Types)
 	std::string translateDefaultError( OmnisTools::tResult pError );
 };

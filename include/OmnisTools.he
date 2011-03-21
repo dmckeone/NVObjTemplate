@@ -209,6 +209,27 @@ namespace OmnisTools {
 		
 		return createNVObj<T>(objectType, pThreadData);
 	}
+    
+    // Generic method to copy a non-visual object from the Omnis dispatch
+    template<class T>
+    void copyNVObj( qlong propID, objCopyInfo* copyInfo, OmnisTools::tThreadData* pThreadData) {
+        
+        LPARAM source = reinterpret_cast<LPARAM>(ECOgetNVObject( (qobjinst) copyInfo->mSourceObject));
+        T* src = (T*) ECOfindNVObject( pThreadData->mEci->mOmnisInstance, source );
+        if( src )
+        {
+            LPARAM destination = reinterpret_cast<LPARAM>(ECOgetNVObject( (qobjinst) copyInfo->mDestinationObject));
+            
+            T* dest = (T*)ECOfindNVObject( pThreadData->mEci->mOmnisInstance, destination );
+            if( !dest )
+            {
+                dest = (T*) src->dup(propID, (qobjinst)copyInfo->mDestinationObject, pThreadData);
+                ECOinsertNVObject( pThreadData->mEci->mOmnisInstance, copyInfo->mDestinationObject, dest );
+            } else {
+                dest->copy( src );
+            }
+        }
+    }
 }
 	
 #endif // OMNIS_TOOLS_HE_

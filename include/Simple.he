@@ -55,6 +55,9 @@ public:
 	// Constructor / Destructor
 	NVObjSimple( qobjinst objinst, OmnisTools::tThreadData *pThreadData );
 	virtual ~NVObjSimple();
+    
+    // Copy object
+    virtual void copy( NVObjSimple* pObj );
 
 	// Methods Available and Method Call Handling
 	virtual qlong returnMethods( OmnisTools::tThreadData* pThreadData );

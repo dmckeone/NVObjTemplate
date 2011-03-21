@@ -47,11 +47,14 @@ NVObjSimple::~NVObjSimple()
 { }
 
 /**************************************************************************************************
- **                              PROPERTY DECLERATION                                            **
+ **                                    COPY                                                      **
  **************************************************************************************************/
 
-// This is where the resource # of the methods is defined.  In this project it is also used as the Unique ID.
-const static qshort cPropertyMyProperty = 3100;
+void NVObjSimple::copy( NVObjSimple* pObj ) {
+    NVObjBase::copy(pObj);
+    
+    myProperty = pObj->myProperty;
+}
 
 /**************************************************************************************************
  **                               METHOD DECLERATION                                             **
@@ -62,8 +65,51 @@ const static qshort cMethodError     = 2100,
                     cMethodSquareNum = 2101,
 					cMethodEmpty     = 2102;
 
+
+// Table of parameter resources and types.
+// Note that all parameters can be stored in this single table and the array offset can be  
+// passed via the MethodsTable.
+//
+// Columns are:
+// 1) Name of Parameter (Resource #)
+// 2) Return type (fft value)
+// 3) Parameter flags of type EXTD_FLAG_xxxx
+// 4) Extended flags.  Documentation states, "Must be 0"
+ECOparam cSimpleMethodsParamsTable[] = 
+{
+	4000, fftInteger  , 0, 0,
+	4001, fftCharacter, 0, 0,
+	4002, fftCharacter, 0, 0,
+	4003, fftCharacter, 0, 0,
+	4004, fftNumber,    0, 0
+};
+
+// Table of Methods available for Simple
+// Columns are:
+// 1) Unique ID 
+// 2) Name of Method (Resource #)
+// 3) Return Type 
+// 4) # of Parameters
+// 5) Array of Parameter Names (Taken from MethodsParamsTable.  Increments # of parameters past this pointer) 
+// 6) Enum Start (Not sure what this does, 0 = disabled)
+// 7) Enum Stop (Not sure what this does, 0 = disabled)
+ECOmethodEvent cSimpleMethodsTable[] = 
+{
+	cMethodError,     cMethodError,     fftNumber, 4, &cSimpleMethodsParamsTable[0], 0, 0,
+	cMethodSquareNum, cMethodSquareNum, fftNumber, 1, &cSimpleMethodsParamsTable[3], 0, 0,
+	cMethodEmpty    , cMethodEmpty    , fftNone  , 0, 0                            , 0, 0
+};
+
+// List of methods in Simple
+qlong NVObjSimple::returnMethods(tThreadData* pThreadData)
+{
+	const qshort cMethodCount = sizeof(cSimpleMethodsTable) / sizeof(ECOmethodEvent);
+	
+	return ECOreturnMethods( gInstLib, pThreadData->mEci, &cSimpleMethodsTable[0], cMethodCount );
+}
+
 /**************************************************************************************************
- **                                 INSTANCE METHODS                                             **
+ **                                  METHOD CALL                                                 **
  **************************************************************************************************/
 
 // Call a method
@@ -94,7 +140,37 @@ qlong NVObjSimple::methodCall( tThreadData* pThreadData )
 }
 
 /**************************************************************************************************
- **                                PROPERTIES                                                    **
+ **                              PROPERTY DECLERATION                                            **
+ **************************************************************************************************/
+
+// This is where the resource # of the methods is defined.  In this project it is also used as the Unique ID.
+const static qshort cPropertyMyProperty = 3100;
+
+
+// Table of properties available from Simple
+// Columns are:
+// 1) Unique ID 
+// 2) Name of Property (Resource #)
+// 3) Return Type 
+// 4) Flags describing the property
+// 5) Additional Flags describing the property
+// 6) Enum Start (Not sure what this does, 0 = disabled)
+// 7) Enum Stop (Not sure what this does, 0 = disabled)
+ECOproperty cSimplePropertyTable[] = 
+{
+	cPropertyMyProperty, cPropertyMyProperty, fftInteger, EXTD_FLAG_PROPCUSTOM, 0, 0, 0 /* Shows under Custom category */
+};
+
+// List of properties in Simple
+qlong NVObjSimple::returnProperties( tThreadData* pThreadData )
+{
+	const qshort propertyCount = sizeof(cSimplePropertyTable) / sizeof(ECOproperty);
+    
+	return ECOreturnProperties( gInstLib, pThreadData->mEci, &cSimplePropertyTable[0], propertyCount );
+}
+
+/**************************************************************************************************
+ **                                  PROPERTY CALL                                               **
  **************************************************************************************************/
 
 // Assignability of properties
@@ -140,78 +216,6 @@ qlong NVObjSimple::setProperty( tThreadData* pThreadData )
 	}
 
 	return 1L;
-}
-
-/**************************************************************************************************
- **                                        STATIC METHODS                                        **
- **************************************************************************************************/
-
-/* METHODS */
-
-// Table of parameter resources and types.
-// Note that all parameters can be stored in this single table and the array offset can be  
-// passed via the MethodsTable.
-//
-// Columns are:
-// 1) Name of Parameter (Resource #)
-// 2) Return type (fft value)
-// 3) Parameter flags of type EXTD_FLAG_xxxx
-// 4) Extended flags.  Documentation states, "Must be 0"
-ECOparam cSimpleMethodsParamsTable[] = 
-{
-	4000, fftInteger  , 0, 0,
-	4001, fftCharacter, 0, 0,
-	4002, fftCharacter, 0, 0,
-	4003, fftCharacter, 0, 0,
-	4004, fftNumber,    0, 0
-};
-
-// Table of Methods available for Simple
-// Columns are:
-// 1) Unique ID 
-// 2) Name of Method (Resource #)
-// 3) Return Type 
-// 4) # of Parameters
-// 5) Array of Parameter Names (Taken from MethodsParamsTable.  Increments # of parameters past this pointer) 
-// 6) Enum Start (Not sure what this does, 0 = disabled)
-// 7) Enum Stop (Not sure what this does, 0 = disabled)
-ECOmethodEvent cSimpleMethodsTable[] = 
-{
-	cMethodError,     cMethodError,     fftNumber, 4, &cSimpleMethodsParamsTable[0], 0, 0,
-	cMethodSquareNum, cMethodSquareNum, fftNumber, 1, &cSimpleMethodsParamsTable[3], 0, 0,
-	cMethodEmpty    , cMethodEmpty    , fftNone  , 0, 0                            , 0, 0
-};
-
-// List of methods in Simple
-qlong NVObjSimple::returnMethods(tThreadData* pThreadData)
-{
-	const qshort cMethodCount = sizeof(cSimpleMethodsTable) / sizeof(ECOmethodEvent);
-	
-	return ECOreturnMethods( gInstLib, pThreadData->mEci, &cSimpleMethodsTable[0], cMethodCount );
-}
-
-/* PROPERTIES */
-
-// Table of properties available from Simple
-// Columns are:
-// 1) Unique ID 
-// 2) Name of Property (Resource #)
-// 3) Return Type 
-// 4) Flags describing the property
-// 5) Additional Flags describing the property
-// 6) Enum Start (Not sure what this does, 0 = disabled)
-// 7) Enum Stop (Not sure what this does, 0 = disabled)
-ECOproperty cSimplePropertyTable[] = 
-{
-	cPropertyMyProperty, cPropertyMyProperty, fftInteger, EXTD_FLAG_PROPCUSTOM, 0, 0, 0 /* Shows under Custom category */
-};
-
-// List of properties in Simple
-qlong NVObjSimple::returnProperties( tThreadData* pThreadData )
-{
-	const qshort propertyCount = sizeof(cSimplePropertyTable) / sizeof(ECOproperty);
-
-	return ECOreturnProperties( gInstLib, pThreadData->mEci, &cSimplePropertyTable[0], propertyCount );
 }
 
 /**************************************************************************************************

@@ -51,6 +51,7 @@ const static qshort kConstResourcePrefix = 23000,
 class NVObjBase;  // To prevent circular include reference with NVObjBase.he declare this here.
 
 NVObjBase* createObject( qlong propID, qobjinst objinst, OmnisTools::tThreadData* );
+void copyObject( qlong propID, objCopyInfo* copyInfo, OmnisTools::tThreadData* );
 void removeObject( qlong propID, NVObjBase* nvObj );
 
 #endif /* NV_OBJ_TEMPLATE_HE */
