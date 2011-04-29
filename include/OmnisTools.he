@@ -41,7 +41,7 @@
 
 #define USE_BOOST
 #ifdef USE_BOOST
-  #include <boost/shared_ptr.hpp>
+#include <boost/shared_ptr.hpp>
 #endif
 
 //Std Library includes
@@ -104,11 +104,43 @@ namespace OmnisTools {
 	qchar* getQCharFromString( const std::string readString, qlong &retLength );
 	qchar* getQCharFromWString( const std::wstring readString, qlong &retLength );
 	
+    // Binary/EXTfldval helpers
+    template<class T>
+    void getEXTfldvalFromBinary(EXTfldval& fVal, T* data) {
+        if (data) {
+            qlong binSize = sizeof(data) / sizeof(T);
+            qbyte* binAssign = static_cast<qbyte*>(MEMmalloc(binSize * sizeof(qbyte)));
+            if (binAssign) {
+                MEMmovel(data, binAssign, binSize);
+                fVal.setBinary(fftBinary, binAssign, binSize);
+            }
+        }
+    }
+    
+    template<class T>
+    T* getBinaryFromEXTfldval(EXTfldval& fVal, qlong& length) {
+        qlong binSize = fVal.getBinLen();
+        qbyte* binData = 0;
+        
+        fVal.getBinary(binSize, binData, binSize);
+        
+        // Set return values and data reference
+        length = static_cast<qlong>(binSize);
+        
+        return reinterpret_cast<T*>(binData);
+    }
+    
+    template<class T>
+    T* getBinaryFromEXTfldval(EXTfldval& fVal) {
+        qlong discardLength = 0;
+        return getBinaryFromEXTfldval<T>(fVal, discardLength);
+    }
+    
     // strxxx helpers
-    str15 initStr15(const char* in);
-    str31 initStr31(const char* in);
-    str80 initStr80(const char* in);
-    str255 initStr255(const char* in);
+    str15 initStr15(const char*);
+    str31 initStr31(const char*);
+    str80 initStr80(const char*);
+    str255 initStr255(const char*);
     
 	// C++ type helpers
 	bool getBoolFromEXTFldVal(EXTfldval& fVal);
@@ -117,9 +149,11 @@ namespace OmnisTools {
 	void getEXTFldValFromInt(EXTfldval& fVal, int);
 	long getLongFromEXTFldVal(EXTfldval& fVal);
 	void getEXTFldValFromLong(EXTfldval& fVal, long);
+    float getFloatFromEXTFldVal(EXTfldval& fVal);
+	void getEXTFldValFromFloat(EXTfldval& fVal, float);
 	double getDoubleFromEXTFldVal(EXTfldval& fVal);
 	void getEXTFldValFromDouble(EXTfldval& fVal, double);
-
+    
     void getEXTFldValFromConstant(EXTfldval& fVal, qlong constID, qlong prefixID = 0);
 #ifdef USE_BOOST
 	int getIntFromEXTFldVal(EXTfldval& fVal, qlong firstConstID, qlong lastConstID);
@@ -231,5 +265,5 @@ namespace OmnisTools {
         }
     }
 }
-	
+
 #endif // OMNIS_TOOLS_HE_

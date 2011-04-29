@@ -255,9 +255,10 @@ qchar* OmnisTools::getQCharFromWString(const std::wstring readString, qlong &ret
 	
 	// Cast-away constness of c_str() pointer 
 	wchar_t* cString = const_cast<wchar_t*>(readString.c_str());
-    
-	qchar* omnisString = new qchar(readString.length());
 	
+    // Declare pointer to new data
+    qchar* omnisString;
+    
 #if MARKUP_SIZEOFWCHAR == 2
 	// For 2-Byte UTF16 wchar_t* (Typically Windows)
 	// Feed into raw byte data
@@ -328,10 +329,10 @@ void OmnisTools::getEXTFldValFromString(EXTfldval& fVal, const std::string readS
 // Set an existing EXTfldval object from a std::wstring
 void OmnisTools::getEXTFldValFromChar(EXTfldval& fVal, const char* readChar) {
     std::string readString;
-    if (readChar == 0)
-        readString = "";
-    else
+    if (readChar)
         readString = readChar;
+    else
+        readString = "";
     
     getEXTFldValFromString(fVal, readString);
 }
@@ -449,6 +450,23 @@ long OmnisTools::getLongFromEXTFldVal(EXTfldval& fVal) {
 // Get an EXTfldval for a C++ long
 void OmnisTools::getEXTFldValFromLong(EXTfldval& fVal, long l) {
 	fVal.setLong(static_cast<qlong>(l));
+}
+
+// Return a C++ long from an EXTfldval
+float OmnisTools::getFloatFromEXTFldVal(EXTfldval& fVal) {
+	qreal omnReal; qshort dp;
+	fVal.getNum(omnReal, dp);
+	
+	float retFloat = static_cast<float>(omnReal);
+	
+	return retFloat;
+}
+
+// Get an EXTfldval for a C++ double
+void OmnisTools::getEXTFldValFromFloat(EXTfldval& fVal, float d) {
+	qreal omnReal = static_cast<qreal>(d);
+	qshort dp = dpFmask;
+	fVal.setNum(omnReal, dp);
 }
 
 // Return a C++ long from an EXTfldval
