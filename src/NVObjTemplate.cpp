@@ -170,7 +170,7 @@ extern "C" qlong OMNISWNDPROC NVObjWndProc(HWND hwnd, LPARAM Msg, WPARAM wParam,
 		// For most components this can be removed - see other BLYTH component examples
 		case ECM_CONNECT:
 		{
-			return EXT_FLAG_LOADED|EXT_FLAG_NVOBJECTS; // Return external flags. Loaded & Has Non-Visual Objects
+			return EXT_FLAG_LOADED|EXT_FLAG_REMAINLOADED|EXT_FLAG_ALWAYS_USABLE|EXT_FLAG_NVOBJECTS; // Return external flags. Loaded, Remain Loaded, Always Usable & Has Non-Visual Objects
 		} 
 			
 		// ECM_DISCONNECT - this message is sent only once when the OMNIS session is ending and should not be confused
