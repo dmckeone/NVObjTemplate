@@ -78,7 +78,7 @@ void methodStaticEmpty(tThreadData* pThreadData, qshort paramCount) {
 	
 	// Build return value
 	EXTfldval valReturn;
-	valReturn.setBool(qtrue);
+	getEXTFldValFromBool(valReturn, true);
 	
 	// Return it to Omnis
 	ECOaddParam(pThreadData->mEci, &valReturn);

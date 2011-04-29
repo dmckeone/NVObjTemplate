@@ -24,17 +24,11 @@
 		96CA4E550907E8CC00C234AA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		96CA4E5A0907E8CC00C234AA /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08EA7FFBFE8413EDC02AAC07 /* Carbon.framework */; };
 		96CA4E660907EB0700C234AA /* u_complib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96CA4E650907EB0700C234AA /* u_complib.framework */; };
-		B01F974C132A7CFE0031F767 /* NVObjTemplate.rc in Resources */ = {isa = PBXBuildFile; fileRef = B01F974B132A7CFE0031F767 /* NVObjTemplate.rc */; };
 		B02360CC11765D30001236FE /* NVObjBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B02360C911765D30001236FE /* NVObjBase.cpp */; };
 		B02360CD11765D30001236FE /* NVObjTemplate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B02360CA11765D30001236FE /* NVObjTemplate.cpp */; };
 		B02360CE11765D30001236FE /* Simple.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B02360CB11765D30001236FE /* Simple.cpp */; };
-		B02360D211765D3A001236FE /* NVObjBase.he in Resources */ = {isa = PBXBuildFile; fileRef = B02360CF11765D3A001236FE /* NVObjBase.he */; };
-		B02360D311765D3A001236FE /* NVObjTemplate.he in Resources */ = {isa = PBXBuildFile; fileRef = B02360D011765D3A001236FE /* NVObjTemplate.he */; };
-		B02360D411765D3A001236FE /* Simple.he in Resources */ = {isa = PBXBuildFile; fileRef = B02360D111765D3A001236FE /* Simple.he */; };
-		B03C1D41130EDAE600661BC0 /* Static.he in Resources */ = {isa = PBXBuildFile; fileRef = B03C1D40130EDAE500661BC0 /* Static.he */; };
 		B03C1D50130EDBCB00661BC0 /* Static.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B03C1D4F130EDBCB00661BC0 /* Static.cpp */; };
 		B0A46050125F550F003A3050 /* OmnisTools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0A4604F125F550F003A3050 /* OmnisTools.cpp */; };
-		B0A46052125F5517003A3050 /* OmnisTools.he in Resources */ = {isa = PBXBuildFile; fileRef = B0A46051125F5517003A3050 /* OmnisTools.he */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -208,12 +202,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				96CA4E550907E8CC00C234AA /* InfoPlist.strings in Resources */,
-				B02360D211765D3A001236FE /* NVObjBase.he in Resources */,
-				B02360D311765D3A001236FE /* NVObjTemplate.he in Resources */,
-				B02360D411765D3A001236FE /* Simple.he in Resources */,
-				B0A46052125F5517003A3050 /* OmnisTools.he in Resources */,
-				B03C1D41130EDAE600661BC0 /* Static.he in Resources */,
-				B01F974C132A7CFE0031F767 /* NVObjTemplate.rc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
