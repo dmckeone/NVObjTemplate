@@ -588,41 +588,73 @@ int OmnisTools::getIntFromEXTFldVal(EXTfldval& fVal, qlong firstID, qlong lastID
 std::string OmnisTools::getISO8601DateStringFromEXTFldVal(EXTfldval& fVal) {
 	datestamptype theDate;
 	std::string retString;
-	std::stringstream sin(retString);
+	std::stringstream sin;
 	
 	fVal.getDate(theDate, dpFdtimeC);
-	ffttype valType; qshort subType; fVal.getType(valType, &subType);
-	
-	if (valType != fftDate)
+	FieldValType theType = getType(fVal);
+    
+	if (theType.valType != fftDate)
 		return "";
-	
+    
 	// Set date part of string
-	switch (subType) {
-		case dpFdate1900:
-		case dpFdate1980:
-		case dpFdate2000:
-		case dpFdtime1900:
-		case dpFdtime1980:
-		case dpFdtime2000:
-	    case dpFdtimeC:
-			sin << theDate.mYear << "-" << theDate.mMonth << "-" << theDate.mDay; 
-			break;
-		default:
-			break;
+    if (theDate.mDateOk == qtrue
+        && (theType.valSubType == dpFdate1900
+            || theType.valSubType == dpFdate1900
+            || theType.valSubType == dpFdate1980
+            || theType.valSubType == dpFdate2000
+            || theType.valSubType == dpFdtime1900
+            || theType.valSubType == dpFdtime1980
+            || theType.valSubType == dpFdtime2000
+            || theType.valSubType == dpFdtimeC
+            || theType.valSubType == 52)) //  NOTE: Odd date type that comes through, but is not defined.
+    {	
+        sin << int(theDate.mYear);
+        if (theDate.mMonth < 10) {
+            sin << "-0" << int(theDate.mMonth);
+        } else {
+            sin << int(theDate.mMonth) << "-" << int(theDate.mDay);
+        } 
+        if (theDate.mDay < 10) {
+            sin << "-0" << int(theDate.mDay);
+        } else {
+            sin << "-" << int(theDate.mDay);
+        } 
 	}
 	
 	// Set time part of string
-	switch (subType) {
-		case dpFdtime1900:
-		case dpFdtime1980:
-		case dpFdtime2000:
-	    case dpFdtimeC:
-		case dpFtime:
-			sin << "T" << theDate.mHour << ":" << theDate.mMin << ":" << theDate.mSec;
-			break;
-		default:
-			break;
-	}
+	// Set date part of string
+    if (theDate.mTimeOk == qtrue
+        && (theType.valSubType == dpFdtime1900
+            || theType.valSubType == dpFdtime1980
+            || theType.valSubType == dpFdtime2000
+            || theType.valSubType == dpFdtimeC
+            || theType.valSubType == dpFtime
+            || theType.valSubType == 52)) 
+    {
+        sin << "T";
+        if (theDate.mHour < 10) {
+            sin << "0" << int(theDate.mHour);
+        } else {
+            sin << int(theDate.mHour);
+        }
+        if (theDate.mMin < 10) {
+            sin << ":0" << int(theDate.mMin);
+        } else {
+            sin << ":" << int(theDate.mMin);
+        }
+        if (theDate.mSecOk) {
+            if (theDate.mSec < 10) {
+                sin << ":0" << int(theDate.mSec);
+            } else {
+                sin << ":" << int(theDate.mSec);
+            }
+        }
+        // NOTE: Even though Omnis contains hundredths data, it is not part of
+        //       the ISO8601 format
+    }
+    
+    // Place string into return value
+    retString = sin.str();
 	
 	return retString;
 }
