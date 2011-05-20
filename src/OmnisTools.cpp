@@ -612,7 +612,7 @@ std::string OmnisTools::getISO8601DateStringFromEXTFldVal(EXTfldval& fVal) {
         if (theDate.mMonth < 10) {
             sin << "-0" << int(theDate.mMonth);
         } else {
-            sin << int(theDate.mMonth) << "-" << int(theDate.mDay);
+            sin << "-" << int(theDate.mMonth);
         } 
         if (theDate.mDay < 10) {
             sin << "-0" << int(theDate.mDay);
