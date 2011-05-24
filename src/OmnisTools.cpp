@@ -598,15 +598,11 @@ std::string OmnisTools::getISO8601DateStringFromEXTFldVal(EXTfldval& fVal) {
     
 	// Set date part of string
     if (theDate.mDateOk == qtrue
-        && (theType.valSubType == dpFdate1900
-            || theType.valSubType == dpFdate1900
-            || theType.valSubType == dpFdate1980
-            || theType.valSubType == dpFdate2000
-            || theType.valSubType == dpFdtime1900
-            || theType.valSubType == dpFdtime1980
-            || theType.valSubType == dpFdtime2000
-            || theType.valSubType == dpFdtimeC
-            || theType.valSubType == 52)) //  NOTE: Odd date type that comes through, but is not defined.
+        && !(theType.valSubType == dpFdtime1900
+             || theType.valSubType == dpFdtime1980
+             || theType.valSubType == dpFdtime2000
+             || theType.valSubType == dpFdtimeC
+             || theType.valSubType == dpFtime))
     {	
         sin << int(theDate.mYear);
         if (theDate.mMonth < 10) {
@@ -622,14 +618,15 @@ std::string OmnisTools::getISO8601DateStringFromEXTFldVal(EXTfldval& fVal) {
 	}
 	
 	// Set time part of string
-	// Set date part of string
     if (theDate.mTimeOk == qtrue
-        && (theType.valSubType == dpFdtime1900
-            || theType.valSubType == dpFdtime1980
-            || theType.valSubType == dpFdtime2000
-            || theType.valSubType == dpFdtimeC
-            || theType.valSubType == dpFtime
-            || theType.valSubType == 52)) 
+        && !(theType.valSubType == dpFdate1900
+             || theType.valSubType == dpFdate1900
+             || theType.valSubType == dpFdate1980
+             || theType.valSubType == dpFdate2000
+             || theType.valSubType == dpFdtime1900
+             || theType.valSubType == dpFdtime1980
+             || theType.valSubType == dpFdtime2000
+             || theType.valSubType == dpFdtimeC))
     {
         sin << "T";
         if (theDate.mHour < 10) {
