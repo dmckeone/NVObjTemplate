@@ -39,12 +39,16 @@
 #include <extcomp.he>
 #include <chrbasic.he>
 
+
 #define USE_BOOST
 #ifdef USE_BOOST
 #include <boost/shared_ptr.hpp>
 #endif
 
-//Std Library includes
+// C Library includes
+#include <ctime>
+
+// STD Library includes
 #include <string>
 #include <map>
 
@@ -153,6 +157,9 @@ namespace OmnisTools {
 	void getEXTFldValFromFloat(EXTfldval& fVal, float);
 	double getDoubleFromEXTFldVal(EXTfldval& fVal);
 	void getEXTFldValFromDouble(EXTfldval& fVal, double);
+    
+    // C type helpers
+    void getEXTFldValFromTime(EXTfldval& fVal, struct tm* utcTime);
     
     void getEXTFldValFromConstant(EXTfldval& fVal, qlong constID, qlong prefixID = 0);
 #ifdef USE_BOOST

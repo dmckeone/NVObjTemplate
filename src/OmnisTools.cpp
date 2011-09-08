@@ -41,10 +41,10 @@
 #include <map>
 
 #ifdef USE_BOOST
-  #include <boost/lexical_cast.hpp>
+#include <boost/lexical_cast.hpp>
 
-  using boost::lexical_cast;
-  using boost::bad_lexical_cast;
+using boost::lexical_cast;
+using boost::bad_lexical_cast;
 #endif
 
 #if ! defined(MARKUP_SIZEOFWCHAR)
@@ -484,6 +484,28 @@ void OmnisTools::getEXTFldValFromDouble(EXTfldval& fVal, double d) {
 	qreal omnReal = static_cast<qreal>(d);
 	qshort dp = dpFmask;
 	fVal.setNum(omnReal, dp);
+}
+
+// Get an EXTfldval for a C time
+void OmnisTools::getEXTFldValFromTime(EXTfldval& fVal, struct tm* cTime) {
+    
+    datestamptype convDate;
+    
+    // Date
+    convDate.mYear = static_cast<qshort>(cTime->tm_year+1900);  // Years since 1900
+    convDate.mMonth = static_cast<char>(cTime->tm_mon+1); // 0 = January, 11 = December
+    convDate.mDay = static_cast<char>(cTime ->tm_mday);
+    convDate.mDateOk = static_cast<char>(qtrue);
+    
+    // Time
+    convDate.mHour = static_cast<char>(cTime->tm_hour);
+    convDate.mMin = static_cast<char>(cTime->tm_min);
+    convDate.mSec = static_cast<char>(cTime->tm_sec);
+    convDate.mTimeOk = static_cast<char>(qtrue);
+    
+    convDate.mHunOk = static_cast<char>(qfalse);
+    
+    fVal.setDate(convDate, dpFdtimeC);
 }
 
 // Get an EXTfldval for a defined constant
