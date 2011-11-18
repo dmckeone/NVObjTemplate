@@ -95,7 +95,7 @@ OPTIONAL -- BOOST LIBRARIES
                e) Variable name = BOOST_ROOT
                f) Variable value is the path to the Boost directory
                    NOTE:  There can be no spaces in the path (See Step 2)
-                    e.g C:\Boost\boost_1_44_0  (For Version 1.44, the current version at time of writing)
+                    e.g C:\Boost\boost_1_48_0  (For Version 1.48, the current version at time of writing)
                g) If Visual Studio is open, close and re-open it.
 
 
@@ -111,28 +111,27 @@ OPTIONAL -- BOOST LIBRARIES
                h) Type = String
                i) Value = Path to the Boost directory
                   NOTE: There can be no spaces in the path (See Step 2)
-                  e.g /Boost/boost_1_44_0  (For Version 1.44, the current version at time of writing)
+                  e.g /Boost/boost_1_48_0  (For Version 1.48, the current version at time of writing)
                f) Log off of OS X and log back in 
 
 5b) Some projects may also require Boost libraries to be built.  To build boost libraries you must go to the boost directory and execute bjam commands or install the libraries from an installer.  The commands are to be executed from the same directory as $BOOST_ROOT from 5a.  NOTE: All projects assume this builds libraries into $BOOST_ROOT/stage/lib
-     Windows: Install libraries from installer (easiest)
-		
-              -or-
-
+     
+      Windows: (Requires a special flag to comply with Omnis' build requirements on Windows /Zc-wchar_t-  -- This is the 'Treat wchar_t as built-in type = NO' option in Visual Studio 2008)
                Complete:
-	       bjam -a --layout=versioned --build-type=complete
+	       bjam -a --layout=versioned --build-type=complete cxxflags=-Zc:wchar_t-
 
 	       Regular:
-	       bjam -a --layout=versioned
+	       bjam -a --layout=versioned cxxflags=-Zc:wchar_t-
 
 	       Complete - Static:
-	       bjam -a --layout=versioned --build-type=complete link=static
+	       bjam -a --layout=versioned --build-type=complete link=static cxxflags=-Zc:wchar_t-
 
 	       Regular - Static:
-	       bjam -a --layout=versioned link=static
+	       bjam -a --layout=versioned link=static cxxflags=-Zc:wchar_t-
 
 
-         Mac:  Complete:
+         Mac:  (Requires special flags for building a universal binary that supports i386, x86_64, ppc and ppc64 
+               Complete:
 	       ./bjam -a --layout=versioned --build-type=complete toolset=darwin  architecture=combined address-model=32_64 macosx-version=10.5 macosx-version-min=10.4
 
 	       Regular:
