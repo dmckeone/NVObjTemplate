@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -21,6 +21,12 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		0FC7E76517F98D490039BEE9 /* Logging.he in Resources */ = {isa = PBXBuildFile; fileRef = 0FC7E76417F98D490039BEE9 /* Logging.he */; };
+		0FC7E76817F98D710039BEE9 /* ThreadTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0FC7E76617F98D710039BEE9 /* ThreadTimer.cpp */; };
+		0FC7E76917F98D710039BEE9 /* Worker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0FC7E76717F98D710039BEE9 /* Worker.cpp */; };
+		0FC7E76C17F98D7B0039BEE9 /* ThreadTimer.he in Resources */ = {isa = PBXBuildFile; fileRef = 0FC7E76A17F98D7B0039BEE9 /* ThreadTimer.he */; };
+		0FC7E77117F991FD0039BEE9 /* SimpleWorker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0FC7E77017F991FD0039BEE9 /* SimpleWorker.cpp */; };
+		0FC7E77617F993620039BEE9 /* libboost_thread-xgcc42-mt-1_49.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC7E77517F993620039BEE9 /* libboost_thread-xgcc42-mt-1_49.a */; };
 		96CA4E550907E8CC00C234AA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		96CA4E5A0907E8CC00C234AA /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08EA7FFBFE8413EDC02AAC07 /* Carbon.framework */; };
 		96CA4E660907EB0700C234AA /* u_complib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96CA4E650907EB0700C234AA /* u_complib.framework */; };
@@ -59,6 +65,14 @@
 /* Begin PBXFileReference section */
 		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		08EA7FFBFE8413EDC02AAC07 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
+		0FC7E76417F98D490039BEE9 /* Logging.he */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Logging.he; path = ../../include/Logging.he; sourceTree = "<group>"; };
+		0FC7E76617F98D710039BEE9 /* ThreadTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ThreadTimer.cpp; path = ../../src/ThreadTimer.cpp; sourceTree = "<group>"; };
+		0FC7E76717F98D710039BEE9 /* Worker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Worker.cpp; path = ../../src/Worker.cpp; sourceTree = "<group>"; };
+		0FC7E76A17F98D7B0039BEE9 /* ThreadTimer.he */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = ThreadTimer.he; path = ../../include/ThreadTimer.he; sourceTree = "<group>"; };
+		0FC7E76B17F98D7B0039BEE9 /* Worker.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Worker.h; path = ../../include/Worker.h; sourceTree = "<group>"; };
+		0FC7E76F17F991BC0039BEE9 /* SimpleWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimpleWorker.h; path = ../../include/SimpleWorker.h; sourceTree = "<group>"; };
+		0FC7E77017F991FD0039BEE9 /* SimpleWorker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SimpleWorker.cpp; path = ../../src/SimpleWorker.cpp; sourceTree = "<group>"; };
+		0FC7E77517F993620039BEE9 /* libboost_thread-xgcc42-mt-1_49.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_thread-xgcc42-mt-1_49.a"; path = "../../../../Boost/boost_1_49_0/stage/lib/libboost_thread-xgcc42-mt-1_49.a"; sourceTree = "<group>"; };
 		96CA4E610907E8CC00C234AA /* NVObjTemplate.u_xcomp */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NVObjTemplate.u_xcomp; sourceTree = BUILT_PRODUCTS_DIR; };
 		96CA4E650907EB0700C234AA /* u_complib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = u_complib.framework; path = /Library/Frameworks/u_complib.framework; sourceTree = "<absolute>"; };
 		B01F974B132A7CFE0031F767 /* NVObjTemplate.rc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = NVObjTemplate.rc; path = ../../resource/NVObjTemplate.rc; sourceTree = "<group>"; };
@@ -81,6 +95,7 @@
 			files = (
 				96CA4E5A0907E8CC00C234AA /* Carbon.framework in Frameworks */,
 				96CA4E660907EB0700C234AA /* u_complib.framework in Frameworks */,
+				0FC7E77617F993620039BEE9 /* libboost_thread-xgcc42-mt-1_49.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,6 +117,7 @@
 		089C1671FE841209C02AAC07 /* External Frameworks and Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				0FC7E77517F993620039BEE9 /* libboost_thread-xgcc42-mt-1_49.a */,
 				96CA4E650907EB0700C234AA /* u_complib.framework */,
 				08EA7FFBFE8413EDC02AAC07 /* Carbon.framework */,
 			);
@@ -120,6 +136,7 @@
 		08FB77ADFE841716C02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				0FC7E76E17F98D9F0039BEE9 /* Worker */,
 				B0A4604F125F550F003A3050 /* OmnisTools.cpp */,
 				B02360C911765D30001236FE /* NVObjBase.cpp */,
 				B02360CA11765D30001236FE /* NVObjTemplate.cpp */,
@@ -127,6 +144,26 @@
 				B03C1D4F130EDBCB00661BC0 /* Static.cpp */,
 			);
 			name = Source;
+			sourceTree = "<group>";
+		};
+		0FC7E76D17F98D7E0039BEE9 /* Worker */ = {
+			isa = PBXGroup;
+			children = (
+				0FC7E76A17F98D7B0039BEE9 /* ThreadTimer.he */,
+				0FC7E76B17F98D7B0039BEE9 /* Worker.h */,
+				0FC7E76F17F991BC0039BEE9 /* SimpleWorker.h */,
+			);
+			name = Worker;
+			sourceTree = "<group>";
+		};
+		0FC7E76E17F98D9F0039BEE9 /* Worker */ = {
+			isa = PBXGroup;
+			children = (
+				0FC7E76617F98D710039BEE9 /* ThreadTimer.cpp */,
+				0FC7E76717F98D710039BEE9 /* Worker.cpp */,
+				0FC7E77017F991FD0039BEE9 /* SimpleWorker.cpp */,
+			);
+			name = Worker;
 			sourceTree = "<group>";
 		};
 		19C28FB4FE9D528D11CA2CBB /* Products */ = {
@@ -140,6 +177,8 @@
 		96D631340905093100E0F291 /* Headers */ = {
 			isa = PBXGroup;
 			children = (
+				0FC7E76D17F98D7E0039BEE9 /* Worker */,
+				0FC7E76417F98D490039BEE9 /* Logging.he */,
 				B0A46051125F5517003A3050 /* OmnisTools.he */,
 				B02360CF11765D3A001236FE /* NVObjBase.he */,
 				B02360D011765D3A001236FE /* NVObjTemplate.he */,
@@ -176,8 +215,11 @@
 /* Begin PBXProject section */
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0410;
+			};
 			buildConfigurationList = 96CF455E08FBABD1003AA3FE /* Build configuration list for PBXProject "NVObjTemplate" */;
-			compatibilityVersion = "Xcode 2.4";
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -204,6 +246,8 @@
 			files = (
 				96CA4E550907E8CC00C234AA /* InfoPlist.strings in Resources */,
 				B0E4AC8D1455F80100B9B898 /* NVObjTemplate.rc in Resources */,
+				0FC7E76517F98D490039BEE9 /* Logging.he in Resources */,
+				0FC7E76C17F98D7B0039BEE9 /* ThreadTimer.he in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,6 +263,9 @@
 				B02360CE11765D30001236FE /* Simple.cpp in Sources */,
 				B0A46050125F550F003A3050 /* OmnisTools.cpp in Sources */,
 				B03C1D50130EDBCB00661BC0 /* Static.cpp in Sources */,
+				0FC7E76817F98D710039BEE9 /* ThreadTimer.cpp in Sources */,
+				0FC7E76917F98D710039BEE9 /* Worker.cpp in Sources */,
+				0FC7E77117F991FD0039BEE9 /* SimpleWorker.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,7 +339,7 @@
 					/Developer/Headers/FlatCarbon,
 					$PROJECT_DIR/English.lproj,
 				);
-				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
+				SDKROOT = macosx10.5;
 				VALID_ARCHS = "i386 x86_64 ppc";
 				WRAPPER_EXTENSION = u_xcomp;
 			};
@@ -335,7 +382,7 @@
 					/Developer/Headers/FlatCarbon,
 					$PROJECT_DIR/English.lproj,
 				);
-				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
+				SDKROOT = macosx10.5;
 				VALID_ARCHS = "i386 x86_64 ppc";
 				WRAPPER_EXTENSION = u_xcomp;
 			};

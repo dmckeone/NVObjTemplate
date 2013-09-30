@@ -1,0 +1,43 @@
+//
+//  ThreadTimer.h
+//  TM_WORK_QUEUE_HE
+//
+//  Created by David McKeone on 11-10-09.
+//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//
+//  This class wraps a single Omnis timer with a singleton for easy 
+//  access and control
+
+#include <extcomp.he>
+#include "NVObjBase.he"
+
+#ifndef THREAD_TIMER_HE_
+#define THREAD_TIMER_HE_
+
+class ThreadTimer {
+private:
+    static FARPROC _omnisTimer;
+    UINT _timerID;
+protected:
+public:
+    ThreadTimer();
+    ~ThreadTimer();
+    
+    ThreadTimer(ThreadTimer const&);              // Don't Implement.
+    void operator=(ThreadTimer const&); // Don't implement
+    
+    const FARPROC timerProc() { return _omnisTimer; }
+    
+    static ThreadTimer& instance();
+    static void OMNISWNDPROC timerMsgProc( HWND hwnd, UINT Msg, UINT idTimer, qulong time );
+    
+    void subscribe(const NVObjBase*);
+    void unsubscribe(const NVObjBase*);
+    
+    enum nextTimer {
+        kTimerContinue = 0,
+        kTimerStop = 1
+    };
+};
+
+#endif // THREAD_TIMER_HE_

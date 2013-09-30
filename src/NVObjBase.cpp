@@ -64,6 +64,13 @@ void NVObjBase::copy( NVObjBase* pObj )
 	mObjInst = inst;
 }
 
+// Notification from timer object
+int NVObjBase::notify() {
+    assert(2==1); // Must override in subclass
+    
+	return 0;
+}
+
 // Methods Available and Method Call Handling (These should be overriden by a sub-class)
 qlong NVObjBase::returnMethods( tThreadData* pThreadData ) { return 1L; }
 qlong NVObjBase::methodCall( tThreadData* pThreadData ) { return 1L; }

@@ -8,6 +8,12 @@ BEGIN
 		 2100									"$error:$error(ErrorCode, ErrorDesc, ErrorText, MethodName) is called when an error has occurred. (Override to receive messages)"
 		 2101									"$squareNum:$squareNum(Number) returns the square of Number"
 		 2102									"$empty:$empty does nothing.  Helps determine object overhead."
+		 2103									"$initialize:$initialize(Row) initializes the worker object"
+		 2104									"$run:$run() runs the worker in the main thread (blocks UI)"
+		 2105									"$start:$start() starts the worker in the background"
+		 2106									"$cancel:$cancel() cancels any running worker"
+		 2107									"$completed:$completed(Row) called when the work successfully completes (should be overriddden)"
+		 2108									"$canceled:$canceled() called when the work has been canceled (should be overriddden)"
 		 
 		 3100									"$myProperty:$myproperty returns a number"
 		 
@@ -16,6 +22,8 @@ BEGIN
 		 4002									"ErrorText"
 		 4003									"MethodName"
 		 4004									"Number"
+		 4005									"Parameters"
+		 4006									"Result"
 		 
 		 5000									"$staticEmpty:$staticEmpty(Integer) static method that returns kTrue."
 		 

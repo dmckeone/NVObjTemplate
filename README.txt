@@ -60,8 +60,16 @@ http://www.tigerlogic.com/tigerlogic/omnis/products/components/buildyourown.jsp
 ../include/OmnisTools.he
 ../src/OmnisTools.cpp    : These files hold a series of helper methods that I've found useful while creating components.
 
+../include/Logging.he : Simple std::cout console logger
+
+../include/ThreadTimer.he
+../src/ThreadTimer.cpp    : Pub/Sub Timer that allows workers to interrupt Omnis Studio
+
+../include/Worker.h
+../src/Worker.cpp     : Worker implementation for background thread processing
+
 ../include/Simple.he
-../src/Simple.cpp    : These files hold an example implementation of a non-visual object, Simple.  Simple has 1 property and 2 methods.  
+../src/Simple.cpp    : These files hold an example implementation of a non-visual object, Simple.  Simple has 1 property and 2 methods.  It also implements the full worker model for $initialize, $start, $run, and $cancel with a simple worker delegate.  
 
 ../include/Static.he
 ../src/Static.cpp    : These files hold an example implementation of static methods.  There is 1 static method, $staticEmpty().

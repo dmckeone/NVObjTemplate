@@ -35,14 +35,17 @@
  * October 4, 2010 David McKeone (Created)
  */
 
+
 //Omnis includes
 #include <extcomp.he>
 #include <chrbasic.he>
 
-
+// Boost includes
 #define USE_BOOST
 #ifdef USE_BOOST
 #include <boost/shared_ptr.hpp>
+#include <boost/any.hpp>
+#include <boost/algorithm/string.hpp>
 #endif
 
 // C Library includes
@@ -51,12 +54,25 @@
 // STD Library includes
 #include <string>
 #include <map>
+#include <vector>
 
 #ifndef OMNIS_TOOLS_HE_
 #define OMNIS_TOOLS_HE_
 
 namespace OmnisTools {
-	
+    
+#ifdef USE_BOOST
+    struct CaseInsensitiveLess : std::binary_function<std::string, std::string, bool>
+    {                
+        bool operator() (const std::string & s1, const std::string & s2) const {
+            return boost::lexicographical_compare(s1, s2, boost::is_iless());
+        }
+    };
+    
+    // Row like object to simulate an Omnis row in C++ standard types.
+    typedef std::map<std::string, boost::any, CaseInsensitiveLess> ParamMap;
+#endif
+    
 	// Generic result type for returning error status
 	typedef qlong tResult;
 	
@@ -124,7 +140,7 @@ namespace OmnisTools {
     template<class T>
     T* getBinaryFromEXTfldval(EXTfldval& fVal, qlong& length) {
         qlong binSize = fVal.getBinLen();
-        qbyte* binData = 0;
+        qbyte* binData = new qbyte[binSize];
         
         fVal.getBinary(binSize, binData, binSize);
         
@@ -147,6 +163,8 @@ namespace OmnisTools {
     str255 initStr255(const char*);
     
 	// C++ type helpers
+    std::vector<unsigned char> getBinaryVectorFromEXTFldVal(EXTfldval& fVal);
+    void getEXTFldValFromBinaryVector(EXTfldval& fVal, std::vector<unsigned char>&); 
 	bool getBoolFromEXTFldVal(EXTfldval& fVal);
 	void getEXTFldValFromBool(EXTfldval& fVal, bool);
 	int getIntFromEXTFldVal(EXTfldval& fVal);
@@ -164,6 +182,9 @@ namespace OmnisTools {
     void getEXTFldValFromConstant(EXTfldval& fVal, qlong constID, qlong prefixID = 0);
 #ifdef USE_BOOST
 	int getIntFromEXTFldVal(EXTfldval& fVal, qlong firstConstID, qlong lastConstID);
+    
+    boost::any getAnyFromEXTFldVal(EXTfldval& val);
+    bool getParamsFromRow(tThreadData* pThreadData, EXTfldval& row, ParamMap& params);
 #endif
 	
 	// get ISO 8601 std::string from Date

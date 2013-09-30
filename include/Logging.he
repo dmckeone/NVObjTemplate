@@ -1,0 +1,22 @@
+//
+//  Logging.he
+//  PostgreSQLBackground
+//
+//  Created by David McKeone on 11-11-11.
+//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//
+
+#include <iostream>
+
+#ifndef LOGGING_HE_
+#define LOGGING_HE_
+
+// Macros for easy logging
+#define LOG_TRACE std::cout << "\n[TRACE] "
+#define LOG_DEBUG std::cout << "\n[DEBUG] "
+#define LOG_INFO std::cout << "\n[INFO] "
+#define LOG_WARNING std::cout << "\n[WARNING] "
+#define LOG_ERROR std::cout << "\n[ERROR] "
+#define LOG_FATAL std::cout << "\n[FATAL] "
+
+#endif // LOGGING_HE_

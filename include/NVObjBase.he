@@ -32,6 +32,7 @@
  */
 
 #include <extcomp.he>
+#include "Worker.h"
 #include "NVObjTemplate.he"
 #include "OmnisTools.he"
 
@@ -52,6 +53,9 @@ public:
 	// Object Copying
 	NVObjBase* dup( qlong propID, qobjinst objinst, OmnisTools::tThreadData *pThreadData );
 	virtual void copy( NVObjBase* pObj );
+    
+    // Timer notification
+    virtual int notify();  // Pure function, must be overridden
 	
 	// Methods Available and Method Call Handling (These should be overriden by a sub-class)
 	virtual qlong returnMethods( OmnisTools::tThreadData* );

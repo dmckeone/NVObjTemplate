@@ -1,5 +1,5 @@
 NVObjTemplate
-Copyright (c) 2010 David McKeone
+Copyright (c) 2013 David McKeone
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -31,7 +31,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 1) Ensure that you have the appropriate development environment installed
      Windows = Visual Studio 2008
-         Mac = XCode 3.2+
+         Mac = XCode 3.2+  (XCode 4.1 on OS X 10.6 preferred)
 
 2) Ensure that you are using Omnis Studio 5+ (This component is Unicode only)
    a) (Mac Only) Ensure that the application path bundle name has no spaces.  e.g. /Applications/OmnisStudio5.app
@@ -85,9 +85,12 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                o) Log off of OS X and log back in 
 
 ---------------------------------------------------------------
-OPTIONAL -- BOOST LIBRARIES
+BOOST LIBRARIES
 ---------------------------------------------------------------
 5a) Some projects may also require the Boost libraries, this requires downloading Boost(http://www.boost.org) extracting it to a directory and setting up the $BOOST_ROOT environment variable.  (Boost Getting Started: http://www.boost.org/doc/libs/release/more/getting_started/index.html)
+
+Note that Boost 1.49.00 is the last compatible version with GCC 4.2 and as of this writing (Omnis Studio 6) that means it is the latest version that can be used with Omnis Externals.
+
       Windows: a) Right-click on My Computer
                b) Click 'Advanced' tab or 'Advanced System Settings'
                c) Click 'Environment Variables'
@@ -95,7 +98,7 @@ OPTIONAL -- BOOST LIBRARIES
                e) Variable name = BOOST_ROOT
                f) Variable value is the path to the Boost directory
                    NOTE:  There can be no spaces in the path (See Step 2)
-                    e.g C:\Boost\boost_1_48_0  (For Version 1.48, the current version at time of writing)
+                    e.g C:\Boost\boost_1_49_0  (For Version 1.49, the current version at time of writing)
                g) If Visual Studio is open, close and re-open it.
 
 
@@ -111,7 +114,7 @@ OPTIONAL -- BOOST LIBRARIES
                h) Type = String
                i) Value = Path to the Boost directory
                   NOTE: There can be no spaces in the path (See Step 2)
-                  e.g /Boost/boost_1_48_0  (For Version 1.48, the current version at time of writing)
+                  e.g /Boost/boost_1_49_0  (For Version 1.49, the current version at time of writing)
                f) Log off of OS X and log back in 
 
 5b) Some projects may also require Boost libraries to be built.  To build boost libraries you must go to the boost directory and execute bjam commands or install the libraries from an installer.  The commands are to be executed from the same directory as $BOOST_ROOT from 5a.  NOTE: All projects assume this builds libraries into $BOOST_ROOT/stage/lib

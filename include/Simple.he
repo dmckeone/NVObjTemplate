@@ -47,6 +47,8 @@ class NVObjSimple : public NVObjBase
 {
 private:
 	qlong				myProperty; /* Value for $myproperty */
+    
+    boost::shared_ptr<Worker> _worker;
 protected:
 public:		
 	// Static tracking variable
@@ -58,6 +60,9 @@ public:
     
     // Copy object
     virtual void copy( NVObjSimple* pObj );
+    
+    // Timer notification
+    virtual int notify();
 
 	// Methods Available and Method Call Handling
 	virtual qlong returnMethods( OmnisTools::tThreadData* pThreadData );
@@ -72,6 +77,16 @@ public:
 	// Custom (Your) Methods
 	OmnisTools::tResult methodSquare( OmnisTools::tThreadData* pThreadData, qshort pParamCount );
 	OmnisTools::tResult methodEmpty( OmnisTools::tThreadData* pThreadData, qshort pParamCount );
+    
+    // Worker
+    OmnisTools::tResult methodInitialize( OmnisTools::tThreadData* pThreadData, qshort pParamCount );
+    OmnisTools::tResult methodRun( OmnisTools::tThreadData* pThreadData, qshort pParamCount );
+    OmnisTools::tResult methodStart( OmnisTools::tThreadData* pThreadData, qshort pParamCount );
+    OmnisTools::tResult methodCancel( OmnisTools::tThreadData* pThreadData, qshort pParamCount );
+    
+    // Worker Callback Stubs
+    OmnisTools::tResult methodCompleted( OmnisTools::tThreadData* pThreadData, qshort pParamCount );
+    OmnisTools::tResult methodCanceled( OmnisTools::tThreadData* pThreadData, qshort pParamCount );
 };
 
 #endif /* SIMPLE_HE_ */
