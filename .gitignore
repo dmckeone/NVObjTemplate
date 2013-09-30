@@ -39,7 +39,3 @@ deploy/*
 *.lai
 *.la
 *.a
-
-# Omnis Libraries
-*.lbs
-*.lbr
