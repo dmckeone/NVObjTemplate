@@ -241,7 +241,19 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\SimpleWorker.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\Static.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ThreadTimer.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\Worker.cpp"
 				>
 			</File>
 		</Filter>
@@ -259,6 +271,10 @@
 			Filter="h;hpp;hxx;hm;inl;fi;fd"
 			>
 			<File
+				RelativePath="..\..\include\Logging.he"
+				>
+			</File>
+			<File
 				RelativePath="..\..\include\NVObjBase.he"
 				>
 			</File>
@@ -275,7 +291,19 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\include\SimpleWorker.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\include\Static.he"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\ThreadTimer.he"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\Worker.h"
 				>
 			</File>
 		</Filter>
